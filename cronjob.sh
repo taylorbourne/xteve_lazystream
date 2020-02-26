@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "Running scripts..."
 
 ##### Config
 use_xTeveAPI="yes"
@@ -19,6 +20,7 @@ xTeveIP="192.168.1.2"
 xTevePORT="34400"
 
 ### Generate playlist and xml data from lazystream
+echo "Running Lazystream..."
 lazystream generate xmltv /playlist/lazystream
 
 ### Emby ip, Port, apiKey, update ID in case API is used to update EPG directly after guide2go
@@ -56,7 +58,8 @@ TVHPATH="/TVH"
 ##
 #
 
-# run guide2go in loop
+# run guide2go in a loop
+echo "Running guide2Go..."
 if [ "$use_guide2go" = "yes" ]; then
 	for jsons in $JsonList
 		do
@@ -74,7 +77,7 @@ sleep 1
 # get TVH playlist
 if [ "$use_TVH_Play" = "yes" ]; then
 	if [ -z "$TVHIP" ]; then
-		echo "no TVHeadend credentials"
+		echo "no TVHeadend credentials provided"
 	else
 		if [ -z "$TVHUSER" ]; then
 			wget -O $TVHOUT http://$TVHIP:$TVHPORT/playlist
@@ -88,8 +91,9 @@ sleep 1
 
 # update xteve via API
 if [ "$use_xTeveAPI" = "yes" ]; then
+	echo "Updating xTeVe..."
 	if [ -z "$xTeveIP" ]; then
-		echo "no xTeve credentials"
+		echo "no xTeve credentials provided"
 	else
 		curl -X POST -d '{"cmd":"update.xmltv"}' http://$xTeveIP:$xTevePORT/api/
 		sleep 1
@@ -98,10 +102,11 @@ if [ "$use_xTeveAPI" = "yes" ]; then
 	fi
 fi
 
-# copy file to TVHeadend
+# copy xmltv file to TVHeadend
 if [ "$use_TVH_move" = "yes" ]; then
+	echo "Copying file to TVHeadend..."
 	if [ -z "$TVHPATH" ]; then
-		echo "no Path credential"
+		echo "no TVHeadend Path provided"
 	else
 		cp $TVHSOURCE $TVHPATH/guide.xml
 	fi
@@ -109,8 +114,9 @@ fi
 
 # update Emby via API
 if [ "$use_embyAPI" = "yes" ]; then
+	echo "Updating Emby..."
 	if [ -z "$embyIP" ]; then
-		echo "no Emby credentials"
+		echo "no Emby credentials provided"
 	else
 		curl -X POST "http://$embyIP:$embyPORT/emby/ScheduledTasks/Running/$embyID?api_key=$embyApiKey" -H "accept: */*" -d ""
 		sleep 1
@@ -119,8 +125,9 @@ fi
 
 # update Plex via API
 if [ "$use_plexAPI" = "yes" ]; then
+	echo "Updating Plex..."
 	if [ -z "$plexIP" ]; then
-		echo "no Plex credentials"
+		echo "no Plex credentials provided"
 	else
 		curl -s "http://$plexIP:$plexPORT/livetv/dvrs/$plexID/reloadGuide?X-Plex-Product=Plex%20Web&X-Plex-Version=4.8.4&X-Plex-Client-Identifier=$plexToken&X-Plex-Platform=Firefox&X-Plex-Platform-Version=69.0&X-Plex-Sync-Version=2&X-Plex-Features=external-media&X-Plex-Model=bundled&X-Plex-Device=Linux&X-Plex-Device-Name=Firefox&X-Plex-Device-Screen-Resolution=1128x657%2C1128x752&X-Plex-Language=de" -H "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0" -H "Accept: text/plain, */*; q=0.01" -H "Accept-Language: de" --compressed -H "X-Requested-With: XMLHttpRequest" -H "Connection: keep-alive" -H "Referer: http://$plexIP:$plexPORT/web/index.html" --data ""
 		sleep 1
