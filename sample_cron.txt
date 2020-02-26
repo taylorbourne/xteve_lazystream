@@ -1,0 +1,6 @@
+printf '45  04  *  *  *  /config/cronjob.sh' > /etc/crontabs/root
+### remove from here including this line ###
+### edit your cron time
+### rename to cron.txt
+### restart docker, new cron time from then
+### no cron.txt it ll update daily at 00:00
