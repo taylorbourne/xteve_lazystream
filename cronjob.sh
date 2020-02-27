@@ -22,6 +22,7 @@ xTevePORT="34400"
 echo "Running Lazystream..."
 rm ./playlists/lazystream/lazystream.m3u
 rm ./playlists/lazystream/lazystream.xml
+mkdir -p ./playlists/lazystream
 lazystream generate xmltv /playlists/lazystream/lazystream
 
 ### Emby
