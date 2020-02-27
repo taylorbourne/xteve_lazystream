@@ -2,6 +2,23 @@
 
 This Docker provides a simple solution to get live NHL and MLB games into your Emby or Plex live TV setup. When combined with a comprehensive IPTV package this setup can you rolling with live TV and high quality sports. If you would only like to use this for the available sports, simply disable guide2go (or any other function you would like) from the cronjob.
 
+## Run Command
+
+```
+docker run -d \
+  --name=xteve_lazystream \
+  --net=host \
+  --log-opt max-size=10m \
+  --log-opt max-file=3 \
+  -e TZ="America/Los_Angeles" \
+  -v /mnt/user/appdata/xteve/:/root/.xteve:rw \
+  -v /mnt/user/appdata/xteve/_config/:/config:rw \
+  -v /mnt/user/appdata/xteve/_guide2go/:/guide2go:rw \
+  -v /mnt/user/appdata/xteve/playlists/:/playlists:rw \
+  -v /tmp/xteve/:/tmp/xteve:rw \
+  taylorbourne/xteve_lazystream
+```
+
 ## guide2go
 
 XMLTV EPG grabber for Schedules Direct, thanks to @marmei  
