@@ -21,7 +21,10 @@ xTevePORT="34400"
 
 ### Generate playlist and xml data from lazystream
 echo "Running Lazystream..."
-lazystream generate xmltv /playlist/lazystream
+rm ./playlists/lazystream.m3u
+rm ./playlists/lazystream.xml
+
+lazystream generate xmltv /playlists/lazystream
 
 ### Emby ip, Port, apiKey, update ID in case API is used to update EPG directly after guide2go
 # ONLY when xteve API is in use, otherwise obsolete

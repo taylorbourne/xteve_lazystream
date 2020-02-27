@@ -1,6 +1,4 @@
 xteve -port=34400 -config=/root/.xteve/test/
-### remove from here including this line ###
-### edit your xteve command
-### rename to xteve.txt
-### restart docker, xteve will run with given parameter
-### no xteve.txt it ll start default values -port=34400 -config=/root/.xteve/
+### Remove this line and everything beneath it ###
+### Edit the above xteve run command, rename this file to xteve.txt, and restart the container
+### If no xteve.txt is found xTeVe will start with default values "-port=34400 -config=/root/.xteve/"
