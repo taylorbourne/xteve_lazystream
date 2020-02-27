@@ -2,9 +2,10 @@
 echo "Running scripts..."
 
 ##### Config
-use_xTeveAPI="yes"
 use_embyAPI="no"
+use_guide2go="no"
 use_plexAPI="no"
+use_xTeveAPI="yes"
 
 ### List of created lineup json files in /guide2go
 # Exmaple with 3 lineups
