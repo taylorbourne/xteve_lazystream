@@ -30,7 +30,6 @@ Please note that this Docker is configured to run in host mode. Once the Docker 
 | /config        | /mnt/user/appdata/xteve/\_config/   |
 | /guide2go      | /mnt/user/appdata/xteve/\_guide2go/ |
 | /tmp/xteve     | /tmp/xteve/                         |
-| /TVH           | /mnt/user/appdata/tvheadend/data/   |
 
 ## Hosts file
 
@@ -50,4 +49,4 @@ Simply run the cronjob file inside the Docker container
 
 [Lazystream](https://github.com/tarkah/lazystream) – [@tarkah](https://github.com/tarkah/)  
 [xTeVe](https://github.com/xteve-project/xTeVe) and [guide2go](https://github.com/mar-mei/guide2go) – [@marmei](https://github.com/mar-mei)  
-Original author of the [xTeVe/guide2go Docker](https://github.com/alturismo/xteve_guide2go) – [@alturismo](https://github.com/alturismo)
+Original author of the [xTeVe/guide2go Docker](https://github.com/alturismo/xteve_guide2goe) – [@alturismo](https://github.com/alturismo)
