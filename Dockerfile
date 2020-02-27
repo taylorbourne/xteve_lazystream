@@ -1,7 +1,5 @@
 FROM alpine:latest
 
-RUN cat /etc/hosts
-
 RUN apk update
 RUN apk upgrade
 RUN apk add --no-cache ca-certificates
@@ -32,11 +30,8 @@ RUN apk add ffmpeg
 RUN apk add vlc
 RUN sed -i 's/geteuid/getppid/' /usr/bin/vlc
 
-# Add SSL certs for lazystream
+# Add GNUtls so we can update certs
 RUN apk add --no-cache gnutls-utils
-RUN printf 'y\n' | gnutls-cli --tofu playback.svcs.mlb.com:443
-RUN printf 'y\n' | gnutls-cli --tofu mf.svc.nhl.com:443
-RUN printf 'y\n' | gnutls-cli --tofu mlb-ws-mf.media.mlb.com:443
 
 # Add xTeve and guide2go
 RUN wget https://github.com/xteve-project/xTeVe-Downloads/raw/master/xteve_linux_amd64.zip -O temp.zip; unzip temp.zip -d /usr/bin/; rm temp.zip

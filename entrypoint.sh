@@ -2,6 +2,14 @@
 
 crond -l 2
 
+
+# Update certs
+rm /root/.gnutls/known_hosts
+printf 'y\n' | gnutls-cli --tofu playback.svcs.mlb.com:443
+printf 'y\n' | gnutls-cli --tofu mf.svc.nhl.com:443
+printf 'y\n' | gnutls-cli --tofu mlb-ws-mf.media.mlb.com:443
+cat /root/.gnutls/known_hosts
+
 CRONJOB_FILE=/config/cronjob.sh
 
 if [ -f "$CRONJOB_FILE" ]; then
