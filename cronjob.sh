@@ -5,29 +5,26 @@ echo "Running scripts..."
 use_xTeveAPI="yes"
 use_embyAPI="no"
 use_plexAPI="no"
-use_TVH_Play="no"
-use_TVH_move="no"
 
 ### List of created lineup json files in /guide2go
-# sample with 3 jsons lineups, adjust to yours
+# Exmaple with 3 lineups
 JsonList="CBLguide.json SATguide.json SATSport.json"
 
-### to create your lineups do as follows and follow the instructions
+### to create your lineups run the below command and follow the on-screen instructions
 # docker exec -it <yourdockername> guide2go -configure /guide2go/<lineupnamehere>.json
 
-### xTeve ip, Port in case API is used to update XEPG
+### xTeVe
 xTeveIP="192.168.1.2"
 xTevePORT="34400"
 
-### Generate playlist and xml data from lazystream
+### Generate playlist and XML data from Lazystream
 echo "Running Lazystream..."
 rm ./playlists/lazystream.m3u
 rm ./playlists/lazystream.xml
-
 lazystream generate xmltv /playlists/lazystream
 
-### Emby ip, Port, apiKey, update ID in case API is used to update EPG directly after guide2go
-# ONLY when xteve API is in use, otherwise obsolete
+### Emby
+# Only necessary if xTeVe API is active
 # API Key, https://github.com/MediaBrowser/Emby/wiki/Api-Key-Authentication
 # embyID, settings, scroll down click API, Scheduled Task Service, GET /ScheduledTasks, Try, Execute, look for "Refresh Guide" ID, sample here 9492d30c70f7f1bec3757c9d0a4feb45
 embyIP="192.168.1.2"
@@ -35,25 +32,14 @@ embyPORT="8096"
 embyApiKey=""
 embyID="9492d30c70f7f1bec3757c9d0a4feb45"
 
-### Plex ip, Port, Token, TV Section ID in case API is used to update EPG directly after guide2go
-# ONLY when xteve API is in use, otherwise obsolete
-# Plex Token, https://support.plex.tv/articles/204059436-finding-an-authentication-token-x-plex-token/
-# plexID, http://YOUR_IP_HERE:32400/?X-Plex-Token=YOUR_TOKEN_HERE , look for "tv.plex.providers.epg.xmltv:  ", sample here 11
+### Plex
+# Only necessary if xTeVe API is active
+# Finding your Plex token: https://support.plex.tv/articles/204059436-finding-an-authentication-token-x-plex-token/
+# Finding Plex ID: http://YOUR_IP_HERE:32400/?X-Plex-Token=YOUR_TOKEN_HERE , look for "tv.plex.providers.epg.xmltv:  " and enter the value blow.
 plexIP="192.168.1.2"
 plexPORT="32400"
 plexToken=""
-plexID="11"
-
-### TVHeadend ip, Port in case m3u Playlist is wanted
-TVHIP="192.168.1.2"
-TVHPORT="9981"
-TVHUSER="username"
-TVHPASS="password"
-TVHOUT="/root/.xteve/data/channels.m3u"
-
-### Copy a final xml (sample xteve) to tvheadend Data ### u have to mount TVHPATH data dir
-TVHSOURCE="/root/.xteve/data/xteve.xml"
-TVHPATH="/TVH"
+plexID=""
 
 # cronjob, check sample_cron.txt with an editor to adjust time
 
@@ -77,21 +63,6 @@ fi
 
 sleep 1
 
-# get TVH playlist
-if [ "$use_TVH_Play" = "yes" ]; then
-	if [ -z "$TVHIP" ]; then
-		echo "no TVHeadend credentials provided"
-	else
-		if [ -z "$TVHUSER" ]; then
-			wget -O $TVHOUT http://$TVHIP:$TVHPORT/playlist
-		else
-			wget -O $TVHOUT http://$TVHUSER:$TVHPASS@$TVHIP:$TVHPORT/playlist
-		fi
-	fi
-fi
-
-sleep 1
-
 # update xteve via API
 if [ "$use_xTeveAPI" = "yes" ]; then
 	echo "Updating xTeVe..."
@@ -102,16 +73,6 @@ if [ "$use_xTeveAPI" = "yes" ]; then
 		sleep 1
 		curl -X POST -d '{"cmd":"update.xepg"}' http://$xTeveIP:$xTevePORT/api/
 		sleep 1
-	fi
-fi
-
-# copy xmltv file to TVHeadend
-if [ "$use_TVH_move" = "yes" ]; then
-	echo "Copying file to TVHeadend..."
-	if [ -z "$TVHPATH" ]; then
-		echo "no TVHeadend Path provided"
-	else
-		cp $TVHSOURCE $TVHPATH/guide.xml
 	fi
 fi
 

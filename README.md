@@ -32,6 +32,10 @@ Please note that this Docker is configured to run in host mode. Once the Docker 
 | /tmp/xteve     | /tmp/xteve/                         |
 | /TVH           | /mnt/user/appdata/tvheadend/data/   |
 
+## Hosts file
+
+In order to properly play streams from Lazystream you must update your hosts file. Please follow the steps on this page: https://www.reddit.com/r/LazyMan/wiki/hostsfile
+
 ## guide2go
 
 If you have an existing guide2go setup you may copy the `.json` files into the path mounted at `/guide2go`. Otherwise run the following command and follow the on-screen steps
@@ -44,5 +48,6 @@ Simply run the cronjob file inside the Docker container
 
 # Credits
 
+Lazystream – @tarkah
 xTeVe and guide2go – @marmei
 Original author of the xTeVe/guide2go Docker – @alturismo
