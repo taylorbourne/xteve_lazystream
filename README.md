@@ -6,17 +6,19 @@ This Docker provides a simple solution to get live NHL and MLB games into your E
 
 ```
 docker run -d \
-  --name=xteve_lazystream \
-  --net=host \
-  --log-opt max-size=10m \
-  --log-opt max-file=3 \
-  -e TZ="America/Los_Angeles" \
-  -v /mnt/user/appdata/xteve/:/root/.xteve:rw \
-  -v /mnt/user/appdata/xteve/_config/:/config:rw \
-  -v /mnt/user/appdata/xteve/_guide2go/:/guide2go:rw \
-  -v /mnt/user/appdata/xteve/playlists/:/playlists:rw \
-  -v /tmp/xteve/:/tmp/xteve:rw \
-  taylorbourne/xteve_lazystream
+	  --name=xteve_lazystream \
+	  --log-opt max-size=10m \
+	  --log-opt max-file=3 \
+	  -e TZ="America/Los_Angeles" \
+	  -v /mnt/user/appdata/xteve/:/root/.xteve:rw \
+	  -v /mnt/user/appdata/xteve/_config/:/config:rw \
+	  -v /mnt/user/appdata/xteve/_guide2go/:/guide2go:rw \
+    -v /mnt/user/appdata/xteve/playlists/:/playlists:rw \
+	  -v /tmp/xteve/:/tmp/xteve:rw \
+    --add-host="mf.svc.nhl.com:$IP" \
+	  --add-host="playback.svcs.mlb.com:$IP" \
+	  --add-host="mlb-ws-mf.media.mlb.com:$IP" \
+	  taylorbourne/xteve_lazystream
 ```
 
 ## guide2go
@@ -48,10 +50,6 @@ Please note that this Docker is configured to run in host mode. Once the Docker 
 | /guide2go      | /mnt/user/appdata/xteve/\_guide2go/ |
 | /playlists     | /mnt/user/appdata/xteve/playlists/  |
 | /tmp/xteve     | /tmp/xteve/                         |
-
-## Hosts file
-
-In order to properly play streams from Lazystream you must update your hosts file. Please follow the steps on this page: https://www.reddit.com/r/LazyMan/wiki/hostsfile
 
 ## guide2go
 
