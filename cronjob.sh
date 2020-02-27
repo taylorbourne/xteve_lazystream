@@ -55,14 +55,14 @@ if [ "$use_lazystream" = "yes" ]; then
 		rm ./playlists/lazystream/lazystream-nhl.m3u
 		rm ./playlists/lazystream/lazystream-nhl.xml
 		mkdir -p ./playlists/lazystream
-		lazystream generate xmltv /playlists/lazystream/lazystream-nhl
+		lazystream generate xmltv --channel-prefix Lazystream:\ NHL /playlists/lazystream/lazystream-nhl
 	fi
 	if [ "$include_mlb" = "yes" ]; then
 		echo "Running Lazystream (MLB)..."
 		rm ./playlists/lazystream/lazystream-mlb.m3u
 		rm ./playlists/lazystream/lazystream-mlb.xml
 		mkdir -p ./playlists/lazystream
-		lazystream generate xmltv /playlists/lazystream/lazystream-mlb
+		lazystream --sport mlb generate xmltv --channel-prefix Lazystream:\ MLB /playlists/lazystream/lazystream-mlb
 	fi
 fi
 
