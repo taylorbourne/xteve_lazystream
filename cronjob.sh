@@ -4,8 +4,13 @@ echo "Running scripts..."
 ##### Config
 use_embyAPI="no"
 use_guide2go="no"
+use_lazystream="no"
 use_plexAPI="no"
 use_xTeveAPI="yes"
+
+##### Lazystream Config
+include_nhl="no"
+include_mlb="no"
 
 ### List of created lineup json files in /guide2go
 # Exmaple with 3 lineups
@@ -17,13 +22,6 @@ JsonList="CBLguide.json SATguide.json SATSport.json"
 ### xTeVe
 xTeveIP="192.168.1.2"
 xTevePORT="34400"
-
-### Generate playlist and XML data from Lazystream
-echo "Running Lazystream..."
-rm ./playlists/lazystream/lazystream.m3u
-rm ./playlists/lazystream/lazystream.xml
-mkdir -p ./playlists/lazystream
-lazystream generate xmltv /playlists/lazystream/lazystream
 
 ### Emby
 # Only necessary if xTeVe API is active
@@ -48,6 +46,25 @@ plexID=""
 ### END Config
 ##
 #
+
+### Generate playlist and XML data from Lazystream
+if [ "$use_lazystream" = "yes" ]; then
+
+	if [ "$include_nhl" = "yes" ]; then
+		echo "Running Lazystream (NHL)..."
+		rm ./playlists/lazystream/lazystream-nhl.m3u
+		rm ./playlists/lazystream/lazystream-nhl.xml
+		mkdir -p ./playlists/lazystream
+		lazystream generate xmltv /playlists/lazystream/lazystream-nhl
+	fi
+	if [ "$include_mlb" = "yes" ]; then
+		echo "Running Lazystream (MLB)..."
+		rm ./playlists/lazystream/lazystream-mlb.m3u
+		rm ./playlists/lazystream/lazystream-mlb.xml
+		mkdir -p ./playlists/lazystream
+		lazystream generate xmltv /playlists/lazystream/lazystream-mlb
+	fi
+fi
 
 # run guide2go in a loop
 echo "Running guide2Go..."
