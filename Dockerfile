@@ -1,4 +1,7 @@
 FROM alpine:latest
+
+RUN cat /etc/hosts
+
 RUN apk update
 RUN apk upgrade
 RUN apk add --no-cache ca-certificates
