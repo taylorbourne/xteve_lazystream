@@ -19,9 +19,9 @@ xTevePORT="34400"
 
 ### Generate playlist and XML data from Lazystream
 echo "Running Lazystream..."
-rm ./playlists/lazystream.m3u
-rm ./playlists/lazystream.xml
-lazystream generate xmltv /playlists/lazystream
+rm ./playlists/lazystream/lazystream.m3u
+rm ./playlists/lazystream/lazystream.xml
+lazystream generate xmltv /playlists/lazystream/lazystream
 
 ### Emby
 # Only necessary if xTeVe API is active
