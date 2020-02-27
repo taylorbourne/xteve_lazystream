@@ -29,6 +29,7 @@ Please note that this Docker is configured to run in host mode. Once the Docker 
 | /root/.xteve   | /mnt/user/appdata/xteve/            |
 | /config        | /mnt/user/appdata/xteve/\_config/   |
 | /guide2go      | /mnt/user/appdata/xteve/\_guide2go/ |
+| /playlists     | /mnt/user/appdata/xteve/playlists/  |
 | /tmp/xteve     | /tmp/xteve/                         |
 
 ## Hosts file
