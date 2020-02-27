@@ -1,4 +1,5 @@
 FROM alpine:latest
+
 RUN apk update
 RUN apk upgrade
 RUN apk add --no-cache ca-certificates
@@ -29,10 +30,8 @@ RUN apk add ffmpeg
 RUN apk add vlc
 RUN sed -i 's/geteuid/getppid/' /usr/bin/vlc
 
-# Add SSL certs for lazystream
-RUN openssl s_client -showcerts -connect freegamez.ga:443 </dev/null 2>/dev/null|openssl x509 -outform PEM > /etc/ssl/certs/mf.svc.nhl.com.pem
-RUN openssl s_client -showcerts -connect freegamez.ga:443 </dev/null 2>/dev/null|openssl x509 -outform PEM > /etc/ssl/certs/playback.svcs.mlb.com.pem
-RUN openssl s_client -showcerts -connect freegamez.ga:443 </dev/null 2>/dev/null|openssl x509 -outform PEM > /etc/ssl/certs/mlb-ws-mf.media.mlb.com.pem
+# Add GNUtls so we can update certs
+RUN apk add --no-cache gnutls-utils
 
 # Add xTeve and guide2go
 RUN wget https://github.com/xteve-project/xTeVe-Downloads/raw/master/xteve_linux_amd64.zip -O temp.zip; unzip temp.zip -d /usr/bin/; rm temp.zip
