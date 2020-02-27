@@ -4,18 +4,18 @@ This Docker provides a simple solution to get live NHL and MLB games into your E
 
 ## guide2go
 
-XMLTV EPG grabber for Schedules Direct, thanks to @marmei \
-GitHub: https://github.com/mar-mei/guide2go \
+XMLTV EPG grabber for Schedules Direct, thanks to @marmei  
+GitHub: https://github.com/mar-mei/guide2go  
 Schedules Direct: http://www.schedulesdirect.org/
 
 ## Lazystream
 
-GitHub: https://github.com/tarkah/lazystream \
+GitHub: https://github.com/tarkah/lazystream
 
 ## xTeVe
 
-IPTV and EPG proxy server for Plex, Emby, etc – thanks to @marmei \
-Website: http://xteve.de \
+IPTV and EPG proxy server for Plex, Emby, etc – thanks to @marmei  
+Website: http://xteve.de  
 Discord: https://discordapp.com/channels/465222357754314767/465222357754314773
 
 # Setup
@@ -38,16 +38,16 @@ In order to properly play streams from Lazystream you must update your hosts fil
 
 ## guide2go
 
-If you have an existing guide2go setup you may copy the `.json` files into the path mounted at `/guide2go`. Otherwise run the following command and follow the on-screen steps
+If you have an existing guide2go setup you may copy the `.json` files into the path mounted at `/guide2go`. Otherwise run the following command and follow the on-screen steps  
 `docker exec -it dockername guide2go -configure /guide2go/your_epg_name.json`
 
 ## Testing cronjob function
 
-Simply run the cronjob file inside the Docker container
+Simply run the cronjob file inside the Docker container  
 `docker exec -it dockername ./config/cronjob.sh`
 
 # Credits
 
-Lazystream – @tarkah
-xTeVe and guide2go – @marmei
+Lazystream – @tarkah  
+xTeVe and guide2go – @marmei  
 Original author of the xTeVe/guide2go Docker – @alturismo
