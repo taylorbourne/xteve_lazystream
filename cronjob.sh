@@ -67,8 +67,8 @@ if [ "$use_lazystream" = "yes" ]; then
 fi
 
 # run guide2go in a loop
-echo "Running guide2Go..."
 if [ "$use_guide2go" = "yes" ]; then
+	echo "Running guide2Go..."
 	for jsons in $JsonList
 		do
 		jsonefile="${jsons%.*}"
