@@ -2,6 +2,12 @@
 
 crond -l 2
 
+# Update hosts file
+export IP=$(getent ahostsv4 freegamez.ga | awk '{ print $1 }' | head -1)
+echo $IP playback.svcs.mlb.com >> /etc/hosts
+echo $IP mf.svc.nhl.com >> /etc/hosts
+echo $IP mlb-ws-mf.media.mlb.com >> /etc/hosts
+cat /etc/hosts
 
 # Update certs
 rm /root/.gnutls/known_hosts
