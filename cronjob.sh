@@ -52,9 +52,7 @@ if [ "$use_lazystream" = "yes" ]; then
 
 	if [ "$include_nhl" = "yes" ]; then
 		echo "Running Lazystream (NHL)..."
-		rm ./playlists/lazystream/lazystream-nhl.m3u
-		rm ./playlists/lazystream/lazystream-nhl.xml
-		mkdir -p ./playlists/lazystream
+		mkdir -p /playlists/lazystream
 		lazystream generate xmltv \
 			--channel-prefix Lazystream:\ NHL \
 			--start-channel 1000 \
@@ -62,9 +60,7 @@ if [ "$use_lazystream" = "yes" ]; then
 	fi
 	if [ "$include_mlb" = "yes" ]; then
 		echo "Running Lazystream (MLB)..."
-		rm ./playlists/lazystream/lazystream-mlb.m3u
-		rm ./playlists/lazystream/lazystream-mlb.xml
-		mkdir -p ./playlists/lazystream
+		mkdir -p /playlists/lazystream
 		lazystream --sport mlb generate xmltv \
 			--channel-prefix Lazystream:\ MLB \
 			--start-channel 2000 \
