@@ -90,6 +90,8 @@ if [ "$use_xTeveAPI" = "yes" ]; then
 	if [ -z "$xTeveIP" ]; then
 		echo "no xTeve credentials provided"
 	else
+		curl -X POST -d '{"cmd":"update.m3u"}' http://$xTeveIP:$xTevePORT/api/
+		sleep 1
 		curl -X POST -d '{"cmd":"update.xmltv"}' http://$xTeveIP:$xTevePORT/api/
 		sleep 1
 		curl -X POST -d '{"cmd":"update.xepg"}' http://$xTeveIP:$xTevePORT/api/
