@@ -37,7 +37,7 @@ RUN wget https://github.com/xteve-project/xTeVe-Downloads/raw/master/xteve_linux
 ADD guide2go /usr/bin/guide2go
 
 # Add lazystream
-RUN wget https://github.com/tarkah/lazystream/releases/download/v1.9.4/lazystream-v1.9.4-x86_64-unknown-linux-musl.tar.gz -O lazystream.tar.gz; \
+RUN wget https://github.com/tarkah/lazystream/releases/download/v1.9.7/lazystream-v1.9.7-x86_64-unknown-linux-musl.tar.gz -O lazystream.tar.gz; \
     tar xzf lazystream.tar.gz; \
     mv lazystream/lazystream /usr/bin/lazystream; \
     rm lazystream.tar.gz; \
