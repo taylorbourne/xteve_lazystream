@@ -116,7 +116,7 @@ if [ "$use_plexAPI" = "yes" ]; then
 	if [ -z "$plexIP" ]; then
 		echo "no Plex credentials provided"
 	else
-		curl -s "http://$plexIP:$plexPORT/livetv/dvrs/$plexID/reloadGuide?X-Plex-Product=Plex%20Web&X-Plex-Version=4.8.4&X-Plex-Client-Identifier=$plexToken&X-Plex-Platform=Firefox&X-Plex-Platform-Version=69.0&X-Plex-Sync-Version=2&X-Plex-Features=external-media&X-Plex-Model=bundled&X-Plex-Device=Linux&X-Plex-Device-Name=Firefox&X-Plex-Device-Screen-Resolution=1128x657%2C1128x752&X-Plex-Language=de" -H "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0" -H "Accept: text/plain, */*; q=0.01" -H "Accept-Language: de" --compressed -H "X-Requested-With: XMLHttpRequest" -H "Connection: keep-alive" -H "Referer: http://$plexIP:$plexPORT/web/index.html" --data ""
+		curl -X POST "http://$plexIP:$plexPORT/livetv/dvrs/$plexID/reloadGuide?X-Plex-Token=$plexToken"
 		sleep 1
 	fi
 fi
