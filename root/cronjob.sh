@@ -1,51 +1,12 @@
 #!/bin/bash
+
+set -o allexport
+source /config/.env
+set +o allexport
+
 echo "Running scripts..."
 
-##### Config
-use_embyAPI="no"
-use_guide2go="no"
-use_lazystream="no"
-use_plexAPI="no"
-use_xTeveAPI="yes"
-
-##### Lazystream Config
-include_nhl="no"
-include_mlb="no"
-
-### List of created lineup json files in /guide2go
-# Exmaple with 3 lineups
-JsonList="CBLguide.json SATguide.json SATSport.json"
-
-### to create your lineups run the below command and follow the on-screen instructions
-# docker exec -it <yourdockername> guide2go -configure /guide2go/<lineupnamehere>.json
-
-### xTeVe
-xTeveIP="192.168.1.2"
-xTevePORT="34400"
-
-### Emby
-# Only necessary if xTeVe API is active
-# API Key, https://github.com/MediaBrowser/Emby/wiki/Api-Key-Authentication
-# embyID, settings, scroll down click API, Scheduled Task Service, GET /ScheduledTasks, Try, Execute, look for "Refresh Guide" ID, sample here 9492d30c70f7f1bec3757c9d0a4feb45
-embyIP="192.168.1.2"
-embyPORT="8096"
-embyApiKey=""
-embyID="9492d30c70f7f1bec3757c9d0a4feb45"
-
-### Plex
-# Only necessary if xTeVe API is active
-# Finding your Plex token: https://support.plex.tv/articles/204059436-finding-an-authentication-token-x-plex-token/
-# Finding Plex ID: http://YOUR_IP_HERE:32400/?X-Plex-Token=YOUR_TOKEN_HERE , look for "tv.plex.providers.epg.xmltv:  " and enter the value blow.
-plexIP="192.168.1.2"
-plexPORT="32400"
-plexToken=""
-plexID=""
-
-# cronjob, check sample_cron.txt with an editor to adjust time
-
-### END Config
-##
-#
+XTEVE_PORT=${XTEVE_PORT:-34400}
 
 ### Generate playlist and XML data from Lazystream
 if [ "$use_lazystream" = "yes" ]; then
@@ -87,16 +48,12 @@ sleep 1
 # update xteve via API
 if [ "$use_xTeveAPI" = "yes" ]; then
 	echo "Updating xTeVe..."
-	if [ -z "$xTeveIP" ]; then
-		echo "no xTeve credentials provided"
-	else
-		curl -X POST -d '{"cmd":"update.m3u"}' http://$xTeveIP:$xTevePORT/api/
-		sleep 1
-		curl -X POST -d '{"cmd":"update.xmltv"}' http://$xTeveIP:$xTevePORT/api/
-		sleep 1
-		curl -X POST -d '{"cmd":"update.xepg"}' http://$xTeveIP:$xTevePORT/api/
-		sleep 1
-	fi
+	curl -X POST -d '{"cmd":"update.m3u"}' http://127.0.0.1:$XTEVE_PORT/api/
+	sleep 1
+	curl -X POST -d '{"cmd":"update.xmltv"}' http://127.0.0.1:$XTEVE_PORT/api/
+	sleep 1
+	curl -X POST -d '{"cmd":"update.xepg"}' http://127.0.0.1:$XTEVE_PORT/api/
+	sleep 1
 fi
 
 # update Emby via API

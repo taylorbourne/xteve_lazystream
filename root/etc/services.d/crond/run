@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv bash
+
+CRON_FILE=/config/cron.txt
+
+if [ -f "$CRON_FILE" ]; then
+	. $CRON_FILE
+else
+	echo "No cron definition found..."
+	echo "By default, cronjob will run every night at midnight unless cron file is configured."
+fi
+
+crond -f -l 2

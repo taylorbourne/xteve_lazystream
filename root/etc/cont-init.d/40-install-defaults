@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv bash
+
+cp /defaults/sample_cron.txt /config/sample_cron.txt
+cp /defaults/sample.env /config/sample.env
+
+cp -n /defaults/xteve-settings.json /xteve/settings.json
+
+mkdir -p /playlists/lazystream/
+cp -n /defaults/lazystream-mlb.m3u /playlists/lazystream/lazystream-mlb.m3u
+cp -n /defaults/lazystream-mlb.xml /playlists/lazystream/lazystream-mlb.xml
+cp -n /defaults/lazystream-nhl.m3u /playlists/lazystream/lazystream-nhl.m3u
+cp -n /defaults/lazystream-nhl.xml /playlists/lazystream/lazystream-nhl.xml
