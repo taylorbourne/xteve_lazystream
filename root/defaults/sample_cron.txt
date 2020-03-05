@@ -1,4 +1,4 @@
-printf '45  04  *  *  *  /cronjob.sh' > /etc/crontabs/root
+printf '0  *  *  *  *  /cronjob.sh' > /etc/crontabs/root
 ### Remove this line and everything beneath it ###
 ### Edit the above cron expression, rename this file to cron.txt, and restart the container.
-### If no cron.txt is found the cronjob will run daily at 00:00
+### If no cron.txt is found the cronjob will run every hour

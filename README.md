@@ -40,7 +40,7 @@ Defaults & behavior can be changed through environment variables. `sample.env` s
 
 ## Cron schedule
 
-By default, the cron job is scheduled to run daily at 00:00. A custom cron schedule can be specified by renaming the `sample_cron.txt` file in the `/config` volume to `cron.txt` and editing the schedule. Make sure to restart your container to take effect.
+By default, the cron job is scheduled to run every hour. A custom cron schedule can be specified by renaming the `sample_cron.txt` file in the `/config` volume to `cron.txt` and editing the schedule. Make sure to restart your container to take effect.
 
 ## Sample volume mapping
 
