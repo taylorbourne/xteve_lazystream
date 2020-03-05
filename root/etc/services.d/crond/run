@@ -5,8 +5,8 @@ CRON_FILE=/config/cron.txt
 if [ -f "$CRON_FILE" ]; then
 	. $CRON_FILE
 else
-	echo "No cron definition found..."
-	echo "By default, cronjob will run every night at midnight unless cron file is configured."
+	echo "[crond-setup] No cron definition found..."
+	echo "[crond-setup] By default, cronjob will run every night at midnight unless cron file is configured."
 fi
 
-crond -f -l 2
+crond -f

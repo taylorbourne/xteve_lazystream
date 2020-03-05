@@ -1,5 +1,14 @@
 #!/usr/bin/with-contenv bash
 
+function prepend() {
+	time=`date +"%Y/%m/%d %H:%M:%S"`
+	while read line;
+	do echo "${time} ${1}${line}";
+	done;
+}
+
+exec 1> >(prepend "[cronjob.sh] ")
+
 echo "Running scripts..."
 
 ### Generate playlist and XML data from Lazystream
@@ -42,11 +51,11 @@ sleep 1
 # update xteve via API
 if [ "$use_xTeveAPI" = "yes" ]; then
 	echo "Updating xTeVe..."
-	curl -X POST -d '{"cmd":"update.m3u"}' http://127.0.0.1:$XTEVE_PORT/api/
+	curl -s -X POST -d '{"cmd":"update.m3u"}' http://127.0.0.1:$XTEVE_PORT/api/
 	sleep 1
-	curl -X POST -d '{"cmd":"update.xmltv"}' http://127.0.0.1:$XTEVE_PORT/api/
+	curl -s -X POST -d '{"cmd":"update.xmltv"}' http://127.0.0.1:$XTEVE_PORT/api/
 	sleep 1
-	curl -X POST -d '{"cmd":"update.xepg"}' http://127.0.0.1:$XTEVE_PORT/api/
+	curl -s -X POST -d '{"cmd":"update.xepg"}' http://127.0.0.1:$XTEVE_PORT/api/
 	sleep 1
 fi
 
@@ -56,7 +65,7 @@ if [ "$use_embyAPI" = "yes" ]; then
 	if [ -z "$embyIP" ]; then
 		echo "no Emby credentials provided"
 	else
-		curl -X POST "http://$embyIP:$embyPORT/emby/ScheduledTasks/Running/$embyID?api_key=$embyApiKey" -H "accept: */*" -d ""
+		curl -s -X POST "http://$embyIP:$embyPORT/emby/ScheduledTasks/Running/$embyID?api_key=$embyApiKey" -H "accept: */*" -d ""
 		sleep 1
 	fi
 fi
@@ -67,7 +76,7 @@ if [ "$use_plexAPI" = "yes" ]; then
 	if [ -z "$plexIP" ]; then
 		echo "no Plex credentials provided"
 	else
-		curl -X POST "http://$plexIP:$plexPORT/livetv/dvrs/$plexID/reloadGuide?X-Plex-Token=$plexToken"
+		curl -s -X POST "http://$plexIP:$plexPORT/livetv/dvrs/$plexID/reloadGuide?X-Plex-Token=$plexToken"
 		sleep 1
 	fi
 fi

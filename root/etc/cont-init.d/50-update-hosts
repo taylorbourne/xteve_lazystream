@@ -1,5 +1,14 @@
 #!/usr/bin/with-contenv bash
 
+function prepend() {
+	while read line;
+	do echo "${1}${line}";
+	done;
+}
+
+exec 1> >(prepend "[update-hosts] ")
+
+
 # Update hosts file
 export IP=$(getent ahostsv4 freegamez.ga | awk '{ print $1 }' | head -1)
 
