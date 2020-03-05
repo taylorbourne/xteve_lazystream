@@ -8,23 +8,25 @@ ENV S6_OVERLAY_RELEASE=${S6_OVERLAY_RELEASE}
 
 ADD ${S6_OVERLAY_RELEASE} /tmp/s6overlay.tar.gz
 
-RUN apk upgrade --update --no-cache \
-    && rm -rf /var/cache/apk/* \
-    && tar xzf /tmp/s6overlay.tar.gz -C / \
+RUN tar xzf /tmp/s6overlay.tar.gz -C / \
     && rm /tmp/s6overlay.tar.gz
 
-
-RUN apk add --no-cache ca-certificates curl tzdata bash coreutils shadow
-
+# Add packages
+RUN apk upgrade --update --no-cache \
+    && apk add --no-cache \
+            ca-certificates \
+            curl \
+            tzdata \
+            bash \
+            coreutils \
+            shadow \
+            ffmpeg \
+            vlc \
+            gnutls-utils
+                       
+# Update Timezone
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-# Add ffmpeg and vlc
-RUN apk add ffmpeg
-RUN apk add vlc
-
-# Add GNUtls so we can update certs
-RUN apk add --no-cache gnutls-utils
 
 # Add xTeve and guide2go
 RUN wget https://github.com/xteve-project/xTeVe-Downloads/raw/master/xteve_linux_amd64.zip -O temp.zip; unzip temp.zip -d /usr/bin/; rm temp.zip
@@ -41,6 +43,7 @@ RUN groupmod -g 1000 users && \
     useradd -u 911 -U -d /home/abc -s /bin/bash abc && \
     usermod -G users abc
 
+# Copy root folder
 COPY root/ /
 
 # Volumes
