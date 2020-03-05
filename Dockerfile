@@ -58,7 +58,31 @@ RUN chmod +x /usr/bin/lazystream
 RUN chmod +x /usr/bin/xteve
 RUN chmod +x /usr/bin/guide2go
 
+# Build arg
+ARG XTEVE_PORT=34400
+
+# Env
+ENV PUID=1000 \
+    PGID=1000 \
+    XTEVE_PORT=${XTEVE_PORT} \
+    use_xTeveAPI=yes \
+    use_lazystream=yes \
+    include_nhl=yes\
+    include_mlb=yes \
+    use_guide2go=no \
+    JsonList="CBLguide.json SATguide.json SATSport.json" \
+    use_embyAPI=no \
+    embyIP= \ 
+    embyPORT=8096 \
+    embyApiKey= \
+    embyID= \
+    use_plexAPI=no \
+    plexIP= \
+    plexPORT=32400 \
+    plexToken= \
+    plexID=
+
 # Expose Port
-EXPOSE 34400
+EXPOSE ${XTEVE_PORT}
 
 ENTRYPOINT [ "/init" ]

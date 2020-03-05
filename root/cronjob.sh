@@ -1,12 +1,6 @@
-#!/bin/bash
-
-set -o allexport
-source /config/.env
-set +o allexport
+#!/usr/bin/with-contenv bash
 
 echo "Running scripts..."
-
-XTEVE_PORT=${XTEVE_PORT:-34400}
 
 ### Generate playlist and XML data from Lazystream
 if [ "$use_lazystream" = "yes" ]; then

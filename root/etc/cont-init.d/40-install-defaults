@@ -1,7 +1,6 @@
 #!/usr/bin/with-contenv bash
 
 cp /defaults/sample_cron.txt /config/sample_cron.txt
-cp /defaults/sample.env /config/sample.env
 
 cp -n /defaults/xteve-settings.json /xteve/settings.json
 

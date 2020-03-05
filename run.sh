@@ -3,8 +3,7 @@
 docker run -d \
 	--name=xteve_lazystream \
 	-p 34400:34400 \
-	-e PUID=$(id -u) \
-	-e PGID=$(id -g) \
+	--env-file=.env \
 	--log-opt max-size=10m \
 	--log-opt max-file=3 \
 	-e TZ="America/Los_Angeles" \

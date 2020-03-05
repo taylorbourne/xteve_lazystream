@@ -1,11 +1,5 @@
 #!/usr/bin/with-contenv bash
 
-set -o allexport
-source /config/.env
-set +o allexport
-
-XTEVE_PORT=${XTEVE_PORT:-34400}
-
 exec \
 	s6-setuidgid abc /bin/bash -c \
 	'xteve -port=$XTEVE_PORT -config=/xteve/'
