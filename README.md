@@ -7,12 +7,13 @@ This Docker provides a simple solution to get live NHL and MLB games into your E
 	- [Env file](#env-file)
 	- [Cron schedule](#cron-schedule)
 	- [Sample volume mapping](#sample-volume-mapping)
+	- [xTeVe](#xteve)
 	- [guide2go](#guide2go)
 	- [Testing cronjob function](#testing-cronjob-function)
 - [Credits](#credits)
 	- [guide2go](#guide2go-1)
 	- [Lazystream](#lazystream)
-	- [xTeVe](#xteve)
+	- [xTeVe](#xteve-1)
 
 # Run
 
@@ -51,6 +52,10 @@ By default, the cron job is scheduled to run every hour. A custom cron schedule 
 | /guide2go      | /mnt/user/appdata/xteve/guide2go  |
 | /playlists     | /mnt/user/appdata/xteve/playlists |
 | /tmp/xteve     | /tmp/xteve                        |
+
+## xTeVe
+
+By default, xTeVe is setup with all 200 channels mapped for NHL and MLB games. This can be setup directly with Plex / Emby to work out of the box without any changes. If needed, changes can be made to xTeVe by going to `127.0.0.1:34400/web/`.
 
 ## guide2go
 
