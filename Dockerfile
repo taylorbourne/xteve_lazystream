@@ -1,40 +1,35 @@
 FROM alpine:latest
 
-RUN apk update
-RUN apk upgrade
-RUN apk add --no-cache ca-certificates
+LABEL maintainer="taylorbourne taylorbourne@me.com.com"
 
-MAINTAINER taylorbourne taylorbourne@me.com.com
+# Install S6 overlay
+ARG S6_OVERLAY_RELEASE=https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-amd64.tar.gz
+ENV S6_OVERLAY_RELEASE=${S6_OVERLAY_RELEASE}
 
-# Extras
-RUN apk add --no-cache curl
+ADD ${S6_OVERLAY_RELEASE} /tmp/s6overlay.tar.gz
 
-# Timezone (TZ)
-RUN apk update && apk add --no-cache tzdata
+RUN tar xzf /tmp/s6overlay.tar.gz -C / \
+    && rm /tmp/s6overlay.tar.gz
+
+# Add packages
+RUN apk upgrade --update --no-cache \
+    && apk add --no-cache \
+            ca-certificates \
+            curl \
+            tzdata \
+            bash \
+            coreutils \
+            shadow \
+            ffmpeg \
+            vlc \
+            gnutls-utils
+                       
+# Update Timezone
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# Add Bash shell & dependancies
-RUN apk add --no-cache bash busybox-suid su-exec
-
-# Volumes
-VOLUME /config
-VOLUME /playlists
-VOLUME /guide2go
-VOLUME /root/.xteve
-VOLUME /tmp/xteve
-
-# Add ffmpeg and vlc
-RUN apk add ffmpeg
-RUN apk add vlc
-RUN sed -i 's/geteuid/getppid/' /usr/bin/vlc
-
-# Add GNUtls so we can update certs
-RUN apk add --no-cache gnutls-utils
-
 # Add xTeve and guide2go
 RUN wget https://github.com/xteve-project/xTeVe-Downloads/raw/master/xteve_linux_amd64.zip -O temp.zip; unzip temp.zip -d /usr/bin/; rm temp.zip
-ADD guide2go /usr/bin/guide2go
 
 # Add lazystream
 RUN wget https://github.com/tarkah/lazystream/releases/download/v1.9.7/lazystream-v1.9.7-x86_64-unknown-linux-musl.tar.gz -O lazystream.tar.gz; \
@@ -43,20 +38,51 @@ RUN wget https://github.com/tarkah/lazystream/releases/download/v1.9.7/lazystrea
     rm lazystream.tar.gz; \
     rm -rf lazystream/
 
-ADD cronjob.sh /
-ADD entrypoint.sh /
-ADD sample_cron.txt /
-ADD sample_xteve.txt /
+# Add abc user
+RUN groupmod -g 1000 users && \
+    useradd -u 911 -U -d /home/abc -s /bin/bash abc && \
+    usermod -G users abc
+
+# Copy root folder
+COPY root/ /
+
+# Volumes
+VOLUME /config
+VOLUME /playlists
+VOLUME /guide2go
+VOLUME /xteve
+VOLUME /tmp/xteve
 
 # Set executable permissions
-RUN chmod +x /entrypoint.sh
-RUN chmod +x /cronjob.sh
 RUN chmod +x /usr/bin/lazystream
 RUN chmod +x /usr/bin/xteve
 RUN chmod +x /usr/bin/guide2go
 
-# Expose Port
-EXPOSE 34400
+# Build arg
+ARG XTEVE_PORT=34400
 
-# Entrypoint
-ENTRYPOINT ["./entrypoint.sh"]
+# Env
+ENV PUID=1000 \
+    PGID=1000 \
+    XTEVE_PORT=${XTEVE_PORT} \
+    use_xTeveAPI=yes \
+    use_lazystream=yes \
+    include_nhl=yes\
+    include_mlb=yes \
+    use_guide2go=no \
+    JsonList="CBLguide.json SATguide.json SATSport.json" \
+    use_embyAPI=no \
+    embyIP= \ 
+    embyPORT=8096 \
+    embyApiKey= \
+    embyID= \
+    use_plexAPI=no \
+    plexIP= \
+    plexPORT=32400 \
+    plexToken= \
+    plexID=
+
+# Expose Port
+EXPOSE ${XTEVE_PORT}
+
+ENTRYPOINT [ "/init" ]

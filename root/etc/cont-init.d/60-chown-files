@@ -1,0 +1,9 @@
+#!/usr/bin/with-contenv bash
+
+chown -R abc:abc /config
+chown -R abc:abc /playlists
+chown -R abc:abc /guide2go
+chown -R abc:abc /xteve
+chown -R abc:abc /tmp/xteve
+
+chown -R abc:abc /home/abc

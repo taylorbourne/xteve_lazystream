@@ -1,0 +1,33 @@
+#!/usr/bin/with-contenv bash
+
+function prepend() {
+	while read line;
+	do echo "${1}${line}";
+	done;
+}
+
+exec 1> >(prepend "[update-hosts] ")
+
+
+# Update hosts file
+export IP=$(getent ahostsv4 freegamez.ga | awk '{ print $1 }' | head -1)
+
+echo $IP playback.svcs.mlb.com >> /etc/hosts
+echo $IP mf.svc.nhl.com >> /etc/hosts
+echo $IP mlb-ws-mf.media.mlb.com >> /etc/hosts
+
+cat /etc/hosts
+
+# Update certs
+rm -f /home/abc/.gnutls/known_hosts
+rm -f /root/.gnutls/known_hosts
+
+printf 'y\n' | gnutls-cli --tofu playback.svcs.mlb.com:443
+printf 'y\n' | gnutls-cli --tofu mf.svc.nhl.com:443
+printf 'y\n' | gnutls-cli --tofu mlb-ws-mf.media.mlb.com:443
+
+install -D /root/.gnutls/known_hosts /home/abc/.gnutls/known_hosts
+
+rm -rf /root/.gnutls
+
+cat /home/abc/.gnutls/known_hosts

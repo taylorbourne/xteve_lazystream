@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+
+exec \
+	s6-setuidgid abc /bin/bash -c \
+	'xteve -port=$XTEVE_PORT -config=/xteve/'

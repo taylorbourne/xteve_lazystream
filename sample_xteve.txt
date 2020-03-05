@@ -1,4 +1,0 @@
-xteve -port=34400 -config=/root/.xteve/test/
-### Remove this line and everything beneath it ###
-### Edit the above xteve run command, rename this file to xteve.txt, and restart the container
-### If no xteve.txt is found xTeVe will start with default values "-port=34400 -config=/root/.xteve/"
