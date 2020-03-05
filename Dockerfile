@@ -1,19 +1,23 @@
-FROM lsiobase/alpine:latest
-
-RUN apk update
-RUN apk upgrade
-RUN apk add --no-cache ca-certificates
+FROM alpine:latest
 
 LABEL maintainer="taylorbourne taylorbourne@me.com.com"
 
-# Extras
-RUN apk add --no-cache curl
+# Install S6 overlay
+ARG S6_OVERLAY_RELEASE=https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-amd64.tar.gz
+ENV S6_OVERLAY_RELEASE=${S6_OVERLAY_RELEASE}
+
+ADD ${S6_OVERLAY_RELEASE} /tmp/s6overlay.tar.gz
+
+RUN apk upgrade --update --no-cache \
+    && rm -rf /var/cache/apk/* \
+    && tar xzf /tmp/s6overlay.tar.gz -C / \
+    && rm /tmp/s6overlay.tar.gz
+
+
+RUN apk add --no-cache ca-certificates curl tzdata bash coreutils shadow
 
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-# Add Bash shell & dependancies
-#RUN apk add --no-cache bash busybox-suid su-exec
 
 # Add ffmpeg and vlc
 RUN apk add ffmpeg
@@ -32,6 +36,11 @@ RUN wget https://github.com/tarkah/lazystream/releases/download/v1.9.7/lazystrea
     rm lazystream.tar.gz; \
     rm -rf lazystream/
 
+# Add abc user
+RUN groupmod -g 1000 users && \
+    useradd -u 911 -U -d /home/abc -s /bin/bash abc && \
+    usermod -G users abc
+
 COPY root/ /
 
 # Volumes
@@ -48,3 +57,5 @@ RUN chmod +x /usr/bin/guide2go
 
 # Expose Port
 EXPOSE 34400
+
+ENTRYPOINT [ "/init" ]
