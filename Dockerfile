@@ -69,6 +69,7 @@ ENV PUID=1000 \
     use_lazystream=yes \
     include_nhl=yes\
     include_mlb=yes \
+    cdn=akc \
     use_guide2go=no \
     JsonList="CBLguide.json SATguide.json SATSport.json" \
     use_embyAPI=no \
