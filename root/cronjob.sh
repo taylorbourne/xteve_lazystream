@@ -14,20 +14,24 @@ echo "Running scripts..."
 ### Generate playlist and XML data from Lazystream
 if [ "$use_lazystream" = "yes" ]; then
 
+	args=""
+	if [ -z $quality ]; then args+=" --quality $quality"; fi
+	if [ "$cdn" = "l3c" ]; then args+=" --cdn l3c"; fi
+
 	if [ "$include_nhl" = "yes" ]; then
-		echo "Running Lazystream (NHL)..."
+		echo "Running Lazystream (NHL $quality via $cdn)..."
 		mkdir -p /playlists/lazystream
 		lazystream generate xmltv \
 			--channel-prefix Lazystream:\ NHL \
-			--start-channel 1000 \
+			--start-channel 1000 $args \
 			/playlists/lazystream/lazystream-nhl
 	fi
 	if [ "$include_mlb" = "yes" ]; then
-		echo "Running Lazystream (MLB)..."
+		echo "Running Lazystream (MLB $quality via $cdn)..."
 		mkdir -p /playlists/lazystream
 		lazystream --sport mlb generate xmltv \
 			--channel-prefix Lazystream:\ MLB \
-			--start-channel 2000 \
+			--start-channel 2000 $args \
 			/playlists/lazystream/lazystream-mlb
 	fi
 fi
