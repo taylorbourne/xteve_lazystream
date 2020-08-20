@@ -59,8 +59,8 @@ By default, xTeVe is setup with all 200 channels mapped for NHL and MLB games. T
 
 ## guide2go
 
-If you have an existing guide2go setup you may copy the `.json` files into the path mounted at `/guide2go`. Otherwise run the following command and follow the on-screen steps  
-`docker exec -it dockername guide2go -configure /guide2go/your_epg_name.json`
+If you have an existing guide2go setup you may copy the `.yaml` files into the path mounted at `/guide2go`. Otherwise run the following command and follow the on-screen steps  
+`docker exec -it dockername guide2go -configure /guide2go/your_epg_name.yaml`
 
 ## Testing cronjob function
 
