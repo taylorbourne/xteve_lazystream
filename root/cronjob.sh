@@ -39,14 +39,14 @@ fi
 # run guide2go in a loop
 if [ "$use_guide2go" = "yes" ]; then
 	echo "Running guide2Go..."
-	for jsons in $JsonList
+	for yamls in $YamlList
 		do
-		jsonefile="${jsons%.*}"
-		filecache='  "file.cache": "/guide2go/cache_'$jsons'",'
-		fileoutput='  "file.output": "/guide2go/'$jsonefile'.xml",'
-		sed -i "/file.cache/c $filecache" /guide2go/$jsons
-		sed -i "/file.output/c $fileoutput" /guide2go/$jsons
-		guide2go -config /guide2go/$jsons
+		yamlfile="${yamls%.*}"
+		filecache='  "file.cache": "/guide2go/cache_'$yamls'",'
+		fileoutput='  "file.output": "/guide2go/'$yamlfile'.xml",'
+		sed -i "/file.cache/c $filecache" /guide2go/$yamls
+		sed -i "/file.output/c $fileoutput" /guide2go/$yamls
+		guide2go -config /guide2go/$yamls
 	done
 fi
 
