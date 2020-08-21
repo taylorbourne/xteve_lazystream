@@ -14,25 +14,39 @@ echo "Running scripts..."
 ### Generate playlist and XML data from Lazystream
 if [ "$use_lazystream" = "yes" ]; then
 
-	args=""
-	if [ -z $quality ]; then args+=" --quality $quality"; fi
-	if [ "$cdn" = "l3c" ]; then args+=" --cdn l3c"; fi
+	args=()
+	if [ ! -z ${quality} ]; then args+=("--quality" "$quality"); fi
+	if [ "$cdn" = "l3c" ]; then args+=("--cdn" "l3c"); fi
 
 	if [ "$include_nhl" = "yes" ]; then
 		echo "Running Lazystream (NHL $quality via $cdn)..."
 		mkdir -p /playlists/lazystream
-		lazystream generate xmltv \
-			--channel-prefix Lazystream:\ NHL \
-			--start-channel 1000 $args \
-			/playlists/lazystream/lazystream-nhl
+
+		nhl_args=()
+
+		nhl_args+=("--channel-prefix")
+		nhl_args+=("Lazystream: NHL")
+		nhl_args+=("--start-channel")
+		nhl_args+=("1000")
+		nhl_args+=("/playlists/lazystream/lazystream-nhl")
+
+		lazystream generate xmltv "${args[@]}" "${nhl_args[@]}"
 	fi
 	if [ "$include_mlb" = "yes" ]; then
 		echo "Running Lazystream (MLB $quality via $cdn)..."
 		mkdir -p /playlists/lazystream
-		lazystream --sport mlb generate xmltv \
-			--channel-prefix Lazystream:\ MLB \
-			--start-channel 2000 $args \
-			/playlists/lazystream/lazystream-mlb
+
+		mlb_args=()
+
+		mlb_args+=("--sport")
+		mlb_args+=("mlb")
+		mlb_args+=("--channel-prefix")
+		mlb_args+=("Lazystream: MLB")
+		mlb_args+=("--start-channel")
+		mlb_args+=("2000")
+		mlb_args+=("/playlists/lazystream/lazystream-mlb")
+
+		lazystream generate xmltv "${args[@]}" "${mlb_args[@]}"
 	fi
 fi
 
