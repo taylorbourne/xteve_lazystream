@@ -11,6 +11,9 @@ exec 1> >(prepend "[cronjob.sh] ")
 
 echo "Running scripts..."
 
+### Grab playlist and add CUID
+python3 /config/pull_playlist.py
+
 ### Generate playlist and XML data from Lazystream
 if [ "$use_lazystream" = "yes" ]; then
 
