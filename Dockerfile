@@ -23,7 +23,7 @@ RUN apk upgrade --update --no-cache \
             ffmpeg \
             vlc \
             gnutls-utils \
-            py-pip
+            --update py-pip
                        
 # Update Timezone
 ENV TZ=America/Los_Angeles
