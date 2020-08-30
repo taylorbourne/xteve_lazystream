@@ -13,7 +13,7 @@ RUN tar xzf /tmp/s6overlay.tar.gz -C / \
 
 # Add packages
 RUN apk upgrade --update --no-cache \
-    && apk add --no-cache \
+    && apk add --no-cache --update \
             ca-certificates \
             curl \
             tzdata \
@@ -23,7 +23,7 @@ RUN apk upgrade --update --no-cache \
             ffmpeg \
             vlc \
             gnutls-utils \
-            --update py-pip
+            py-pip
                        
 # Update Timezone
 ENV TZ=America/Los_Angeles
