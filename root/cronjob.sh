@@ -29,8 +29,15 @@ if [ "$use_lazystream" = "yes" ]; then
 		nhl_args+=("--start-channel")
 		nhl_args+=("1000")
 		nhl_args+=("/playlists/lazystream/lazystream-nhl")
-
-		lazystream generate xmltv "${args[@]}" "${nhl_args[@]}"
+		if [[ "$currenttime" > "10:00" ]] || [[ "$currenttime" < "23:59" ]]; then
+			echo "Running Lazystream today"
+     		lazystream generate xmltv "${args[@]}" "${nhl_args[@]}"
+   		else
+		   	echo "Running Lazystream yesterday"
+		   	yesterday=$(date --date '-1 day' +'%Y%m%d')
+     		lazystream --date "$yesterday" generate xmltv "${args[@]}" "${nhl_args[@]}"
+   		fi
+		
 	fi
 	if [ "$include_mlb" = "yes" ]; then
 		echo "Running Lazystream (MLB $quality via $cdn)..."
