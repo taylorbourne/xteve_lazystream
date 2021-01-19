@@ -29,6 +29,7 @@ if [ "$use_lazystream" = "yes" ]; then
 		nhl_args+=("--start-channel")
 		nhl_args+=("1000")
 		nhl_args+=("/playlists/lazystream/lazystream-nhl")
+		currenttime=$(date +%H:%M)
 		if [[ "$currenttime" > "10:00" ]] && [[ "$currenttime" < "23:59" ]]; then
 			echo "Running Lazystream today"
      		lazystream generate xmltv "${args[@]}" "${nhl_args[@]}"
