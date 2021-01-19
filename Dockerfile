@@ -81,7 +81,8 @@ ENV PUID=1000 \
     plexIP= \
     plexPORT=32400 \
     plexToken= \
-    plexID=
+    plexID= \
+    main_xteve=
 
 # Expose Port
 EXPOSE ${XTEVE_PORT}
