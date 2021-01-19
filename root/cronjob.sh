@@ -83,17 +83,18 @@ if [ "$use_xTeveAPI" = "yes" ]; then
 	sleep 1
 	curl -s -X POST -d '{"cmd":"update.xepg"}' http://127.0.0.1:$XTEVE_PORT/api/
 	sleep 1
-	if [ ! -z "$main_xteve"]; then
+	
+	if [ -n "$main_xteve" ]; then
 	echo "Updating Main xTeVe... $main_xteve"
+	echo "Wating 30s before updating"
+	sleep 30
 	curl -s -X POST -d '{"cmd":"update.m3u"}' http://$main_xteve/api/
 	sleep 1
 	curl -s -X POST -d '{"cmd":"update.xmltv"}' http://$main_xteve/api/
 	sleep 1
 	curl -s -X POST -d '{"cmd":"update.xepg"}' http://$main_xteve/api/
 	sleep 1
-	
-
-fi
+	fi
 
 fi
 
