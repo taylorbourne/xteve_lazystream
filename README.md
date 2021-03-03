@@ -1,6 +1,6 @@
 # Lazystream Plex/Emby Bundle
 
-This Docker provides a simple solution to get live NHL and MLB games into your Emby or Plex live TV setup. When combined with a comprehensive IPTV package this setup can get you rolling with live TV and high quality sports. If you would only like to use this for the available sports, simply disable guide2go (or any other function you would like).
+This Docker provides a simple solution to get live NHL and MLB games into your Emby or Plex live TV setup. When combined with a comprehensive IPTV package this setup can get you rolling with live TV and high quality sports. If you would only like to use this for the available sports, simply disable guide2go (or any other function you would like). Please see the Wiki for some user-created scripts to help get things setup.
 
 - [Run](#run)
 - [Setup](#setup)
