@@ -94,7 +94,7 @@ if [ "$use_plexAPI" = "yes" ]; then
 	if [ -z "$plexIP" ]; then
 		echo "no Plex credentials provided"
 	else
-		curl -s -X POST "http://$plexIP:$plexPORT/livetv/dvrs/$plexID/reloadGuide?X-Plex-Token=$plexToken"
+		curl -s -X POST "$plexUpdateURL"
 		sleep 1
 	fi
 fi
