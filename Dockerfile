@@ -34,7 +34,7 @@ RUN wget https://github.com/xteve-project/xTeVe-Downloads/raw/master/xteve_linux
 # Add lazystream
 RUN wget https://github.com/tarkah/lazystream/releases/download/v1.11.4/lazystream-v1.11.4-x86_64-unknown-linux-musl.tar.gz -O lazystream.tar.gz; \
     tar xzf lazystream.tar.gz; \
-    mv lazystream/lazystream /usr/bin/lazystream; \
+    mv ././lazystream /usr/bin/lazystream; \
     rm lazystream.tar.gz; \
     rm -rf lazystream/
 
