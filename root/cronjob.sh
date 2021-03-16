@@ -91,7 +91,7 @@ fi
 # update Plex via API
 if [ "$use_plexAPI" = "yes" ]; then
 	echo "Updating Plex..."
-	if [ -z "$plexIP" ]; then
+	if [ -z "$plexUpdateURL" ]; then
 		echo "no Plex credentials provided"
 	else
 		curl -s -X POST "$plexUpdateURL"
