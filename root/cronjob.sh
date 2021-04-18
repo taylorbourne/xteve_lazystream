@@ -99,4 +99,21 @@ if [ "$use_plexAPI" = "yes" ]; then
 	fi
 fi
 
+# update Channels via API
+if [ "$use_channelsAPI" = "yes" ]; then
+	echo "Updating Channels..."
+	if [ -z "$channelsUpdateM3uURL" ]; then
+		echo "no Channels M3U URL provided"
+	else
+		curl -s -X POST "$channelsUpdateM3uURL"
+		sleep 1
+	fi
+	if [ -z "$channelsUpdateXmltvURL" ]; then
+		echo "no Channels XMLTV URL provided"
+	else
+		curl -s -X PUT "$channelsUpdateXmltvURL"
+		sleep 1
+	fi
+fi
+
 exit
