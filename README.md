@@ -33,6 +33,8 @@ docker run -d \
 	taylorbourne/xteve_lazystream
 ```
 
+or see [docker-compose.yml](docker-compose.yml) for an example docker-compose setup.
+
 # Setup
 
 ## Env file
