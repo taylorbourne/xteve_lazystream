@@ -7,3 +7,6 @@ chown -R abc:abc /xteve
 chown -R abc:abc /tmp/xteve
 
 chown -R abc:abc /home/abc
+
+# So xteve can auto update
+chown -R abc:abc /usr/bin
