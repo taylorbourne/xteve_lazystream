@@ -22,8 +22,6 @@ echo "remote version: ${latest_version}"
 
 [ "$(arch)" == "x86_64" ] && release_name=$lazyStreamReleaseName || release_name=$lazyStreamReleaseNameAarch64
 
-echo "https://github.com/tarkah/lazystream/releases/download/$latest_version/lazystream-$latest_version-$release_name.tar.gz"
-
 if [ $current_version != $latest_version ]; then
     echo "newer version available, downloading..."
 
