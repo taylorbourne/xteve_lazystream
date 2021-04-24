@@ -11,7 +11,7 @@ exec 1> >(prepend "[update-lazystream] ")
 echo "checking for update"
 
 current_version=$(lazystream --version)
-current_version=v${current_version:11}
+current_version=v1.11.3
 
 echo "installed version: ${current_version}"
 
@@ -20,10 +20,14 @@ latest_version=$(echo $latest_release | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | hea
 
 echo "remote version: ${latest_version}"
 
+[ "$(arch)" == "x86_64" ] && release_name=$lazyStreamReleaseName || release_name=$lazyStreamReleaseNameAarch64
+
+echo "https://github.com/tarkah/lazystream/releases/download/$latest_version/lazystream-$latest_version-$release_name.tar.gz"
+
 if [ $current_version != $latest_version ]; then
     echo "newer version available, downloading..."
 
-    wget https://github.com/tarkah/lazystream/releases/download/$latest_version/lazystream-$latest_version-x86_64-unknown-linux-musl.tar.gz -O lazystream.tar.gz; \
+    wget https://github.com/tarkah/lazystream/releases/download/$latest_version/lazystream-$latest_version-$release_name.tar.gz -O lazystream.tar.gz; \
     tar xzf lazystream.tar.gz; \
     mv ././lazystream /usr/bin/lazystream; \
     rm lazystream.tar.gz; \
