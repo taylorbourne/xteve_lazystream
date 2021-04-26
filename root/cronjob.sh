@@ -30,6 +30,12 @@ if [ "$use_lazystream" = "yes" ]; then
 		nhl_args+=("1000")
 		nhl_args+=("/playlists/lazystream/lazystream-nhl")
 
+		if [ "$nhl_exclude_home" = "yes" ]; 	 then nhl_args+=("--exclude-feeds" "HOME"); fi
+		if [ "$nhl_exclude_away" = "yes" ]; 	 then nhl_args+=("--exclude-feeds" "AWAY"); fi
+		if [ "$nhl_exclude_national" = "yes" ];  then nhl_args+=("--exclude-feeds" "NATIONAL"); fi
+		if [ "$nhl_exclude_french" = "yes" ]; 	 then nhl_args+=("--exclude-feeds" "FRENCH"); fi
+		if [ "$nhl_exclude_composite" = "yes" ]; then nhl_args+=("--exclude-feeds" "COMPOSITE"); fi
+
 		lazystream generate xmltv "${args[@]}" "${nhl_args[@]}"
 	fi
 	if [ "$include_mlb" = "yes" ]; then
