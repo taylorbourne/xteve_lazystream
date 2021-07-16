@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bash
 
 cp /defaults/sample_cron.txt /config/sample_cron.txt
-cp /defaults/sample_pull_playlist.py /config/pull_playlist.py
+cp /defaults/sample_pull_playlist.py /config/sample_pull_playlist.py
 
 cp -n /defaults/xteve-settings.json /xteve/settings.json
 
