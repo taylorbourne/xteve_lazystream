@@ -14,16 +14,16 @@ RUN tar xzf /tmp/s6overlay.tar.gz -C / \
 # Add packages
 RUN apk upgrade --update --no-cache \
     && apk add --no-cache \
-            ca-certificates \
-            curl \
-            tzdata \
-            bash \
-            coreutils \
-            shadow \
-            ffmpeg \
-            vlc \
-            gnutls-utils
-                       
+    ca-certificates \
+    curl \
+    tzdata \
+    bash \
+    coreutils \
+    shadow \
+    ffmpeg \
+    vlc \
+    gnutls-utils
+
 # Update Timezone
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -32,7 +32,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN wget https://github.com/xteve-project/xTeVe-Downloads/raw/master/xteve_linux_amd64.zip -O temp.zip; unzip temp.zip -d /usr/bin/; rm temp.zip
 
 # Add lazystream
-RUN wget https://github.com/tarkah/lazystream/releases/download/v1.11.4/lazystream-v1.11.4-x86_64-unknown-linux-musl.tar.gz -O lazystream.tar.gz; \
+RUN wget https://github.com/tarkah/lazystream/releases/download/v1.11.6/lazystream-v1.11.6-x86_64-unknown-linux-musl.tar.gz -O lazystream.tar.gz; \
     tar xzf lazystream.tar.gz; \
     mv ././lazystream /usr/bin/lazystream; \
     rm lazystream.tar.gz; \
