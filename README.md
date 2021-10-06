@@ -4,16 +4,17 @@ This Docker provides a simple solution to get live NHL and MLB games into your E
 
 - [Run](#run)
 - [Setup](#setup)
-	- [Env file](#env-file)
-	- [Cron schedule](#cron-schedule)
-	- [Sample volume mapping](#sample-volume-mapping)
-	- [xTeVe](#xteve)
-	- [guide2go](#guide2go)
-	- [Testing cronjob function](#testing-cronjob-function)
+  - [Env file](#env-file)
+  - [Cron schedule](#cron-schedule)
+  - [Sample volume mapping](#sample-volume-mapping)
+  - [xTeVe](#xteve)
+  - [guide2go](#guide2go)
+  - [Testing cronjob function](#testing-cronjob-function)
+  - [Notes on Channels DVR](#notes-on-channels-dvr)
 - [Credits](#credits)
-	- [guide2go](#guide2go-1)
-	- [Lazystream](#lazystream)
-	- [xTeVe](#xteve-1)
+  - [guide2go](#guide2go-1)
+  - [Lazystream](#lazystream)
+  - [xTeVe](#xteve-1)
 
 # Run
 
@@ -68,6 +69,13 @@ If you have an existing guide2go setup you may copy the `.yaml` files into the p
 
 Simply run the cronjob file inside the Docker container  
 `docker exec -it dockername ./cronjob.sh`
+
+## Notes On Channels DVR
+
+- You have to select MPEG-TS as the stream format
+- The stream only works in a browser - not on Android TV or Android
+- Adding an m3u playlist to Channels:
+  https://getchannels.com/docs/channels-dvr-server/how-to/custom-channels/#adding-your-custom-channels
 
 # Credits
 
