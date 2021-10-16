@@ -177,6 +177,7 @@
   <Config Name="embyPORT" Target="embyPORT" Default="8096" Mode="" Description="Container Variable: embyPORT" Type="Variable" Display="advanced" Required="false" Mask="false">8096</Config>
   <Config Name="embyApiKey" Target="embyApiKey" Default="" Mode="rw" Description="Container Path: embyApiKey" Type="Path" Display="advanced" Required="false" Mask="false"/>
   <Config Name="use_plexAPI" Target="use_plexAPI" Default="no" Mode="" Description="Container Variable: use_plexAPI" Type="Variable" Display="advanced" Required="false" Mask="false">no</Config>
+  <Config Name="plexUpdateURL" Target="plexUpdateURL" Default="" Mode="" Description="Container Variable: plexUpdateURL" Type="Variable" Display="advanced" Required="false" Mask="false"></Config>  
   <Config Name="use_channelsAPI" Target="use_channelsAPI" Default="no" Mode="" Description="Container Variable: use_channelsAPI" Type="Variable" Display="advanced" Required="false" Mask="false">no</Config>
   <Config Name="lazyStreamReleaseName" Target="lazyStreamReleaseName" Default="x86_64-unknown-linux-musl" Mode="" Description="Container Variable: lazyStreamReleaseName" Type="Variable" Display="advanced-hide" Required="false" Mask="false">x86_64-unknown-linux-musl</Config>
   <Config Name="lazyStreamReleaseNameAarch64" Target="lazyStreamReleaseNameAarch64" Default="aarch64-unknown-linux-gnu" Mode="" Description="Container Variable: lazyStreamReleaseNameAarch64" Type="Variable" Display="advanced-hide" Required="false" Mask="false">aarch64-unknown-linux-gnu</Config>
