@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>xteve_lazystream</Name>
+  <Repository>taylorbourne/xteve_lazystream</Repository>
+  <Registry>https://hub.docker.com/r/taylorbourne/xteve_lazystream/</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://hub.docker.com/r/taylorbourne/xteve_lazystream/</Support>
+  <Project>https://github.com/taylorbourne/xteve_lazystream</Project>
+  <Overview>This Docker provides a simple solution to get live NHL and MLB games into your Emby, Plex, or Channels live TV setup. When combined with a comprehensive IPTV package this setup can get you rolling with live TV and high quality sports. If you would only like to use this for the available sports, simply disable guide2go (or any other function you would like). Please see the Wiki for some user-created scripts to help get things setup.&#xD;
+&#xD;
+</Overview>
+  <Category>MediaApp:Video Status:Beta</Category>
+  <WebUI>http://[IP]:[PORT:34400]/web/</WebUI>
+  <TemplateURL/>
+  <Icon>https://raw.githubusercontent.com/Toylerrr/AdlerUnraid/main/Lazyman.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634371481</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>This Docker provides a simple solution to get live NHL and MLB games into your Emby, Plex, or Channels live TV setup. When combined with a comprehensive IPTV package this setup can get you rolling with live TV and high quality sports. If you would only like to use this for the available sports, simply disable guide2go (or any other function you would like). Please see the Wiki for some user-created scripts to help get things setup.&#xD;
+&#xD;
+</Description>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort>34400</HostPort>
+        <ContainerPort>34400</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/xteve/.xteve</HostDir>
+      <ContainerDir>/xteve</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/xteve/config/</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/xteve/guide2go/</HostDir>
+      <ContainerDir>/guide2go</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/xteve/playlists/</HostDir>
+      <ContainerDir>/playlists</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/tmp/xteve/</HostDir>
+      <ContainerDir>/tmp/xteve</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir/>
+      <ContainerDir>embyApiKey</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>America/Los_Angeles</Value>
+      <Name>TZ</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yes</Value>
+      <Name>use_xTeveAPI</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yes</Value>
+      <Name>use_lazystream</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yes</Value>
+      <Name>include_nhl</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yes</Value>
+      <Name>include_mlb</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>no</Value>
+      <Name>use_guide2go</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>"CBLguide.yaml SATguide.yaml SATSport.yaml"</Value>
+      <Name>YamlList</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>embyIP</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>8096</Value>
+      <Name>embyPORT</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>no</Value>
+      <Name>use_plexAPI</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>no</Value>
+      <Name>use_channelsAPI</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>x86_64-unknown-linux-musl</Value>
+      <Name>lazyStreamReleaseName</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>aarch64-unknown-linux-gnu</Value>
+      <Name>lazyStreamReleaseNameAarch64</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>akc</Value>
+      <Name>cdn</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>no</Value>
+      <Name>use_embyAPI</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>channelsUpdateM3uURL</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>channelsUpdateXmltvURL</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>embyID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="TZ" Target="TZ" Default="" Mode="" Description="Timezone" Type="Variable" Display="always" Required="false" Mask="false">America/Los_Angeles</Config>
+  <Config Name="Path" Target="/xteve" Default="" Mode="rw" Description="Container Path: /xteve" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/xteve/.xteve</Config>
+  <Config Name="Config" Target="/config" Default="/mnt/user/appdata/xteve/config/" Mode="rw" Description="Container Path: /config" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/xteve/config/</Config>
+  <Config Name="path" Target="/guide2go" Default="/mnt/user/appdata/xteve/guide2go/" Mode="rw" Description="Container Path: /guide2go" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/xteve/guide2go/</Config>
+  <Config Name="Path" Target="/playlists" Default="/mnt/user/appdata/xteve/playlists/" Mode="rw" Description="Container Path: /playlists" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/xteve/playlists/</Config>
+  <Config Name="Xteve API" Target="use_xTeveAPI" Default="yes" Mode="" Description="Container Variable: use_xTeveAPI" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="Use Lazystream" Target="use_lazystream" Default="yes" Mode="" Description="Container Variable: use_lazystream" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="Include NHL" Target="include_nhl" Default="yes" Mode="" Description="Container Variable: include_nhl" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="include MLB" Target="include_mlb" Default="yes" Mode="" Description="Container Variable: include_mlb" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="Use Guide2go" Target="use_guide2go" Default="no" Mode="" Description="Container Variable: use_guide2go" Type="Variable" Display="always" Required="false" Mask="false">no</Config>
+  <Config Name="Web Port" Target="34400" Default="34400" Mode="tcp" Description="Container Port: 34400" Type="Port" Display="advanced" Required="false" Mask="false">34400</Config>
+  <Config Name="tmp" Target="/tmp/xteve" Default="/tmp/xteve/" Mode="rw" Description="Container Path: /tmp/xteve" Type="Path" Display="advanced" Required="false" Mask="false">/tmp/xteve/</Config>
+  <Config Name="YamlList" Target="YamlList" Default="" Mode="" Description="Container Variable: YamlList" Type="Variable" Display="advanced" Required="false" Mask="false">"CBLguide.yaml SATguide.yaml SATSport.yaml"</Config>
+  <Config Name="embyIP" Target="embyIP" Default="" Mode="" Description="Container Variable: embyIP" Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="embyPORT" Target="embyPORT" Default="8096" Mode="" Description="Container Variable: embyPORT" Type="Variable" Display="advanced" Required="false" Mask="false">8096</Config>
+  <Config Name="embyApiKey" Target="embyApiKey" Default="" Mode="rw" Description="Container Path: embyApiKey" Type="Path" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="use_plexAPI" Target="use_plexAPI" Default="no" Mode="" Description="Container Variable: use_plexAPI" Type="Variable" Display="advanced" Required="false" Mask="false">no</Config>
+  <Config Name="use_channelsAPI" Target="use_channelsAPI" Default="no" Mode="" Description="Container Variable: use_channelsAPI" Type="Variable" Display="advanced" Required="false" Mask="false">no</Config>
+  <Config Name="lazyStreamReleaseName" Target="lazyStreamReleaseName" Default="x86_64-unknown-linux-musl" Mode="" Description="Container Variable: lazyStreamReleaseName" Type="Variable" Display="advanced-hide" Required="false" Mask="false">x86_64-unknown-linux-musl</Config>
+  <Config Name="lazyStreamReleaseNameAarch64" Target="lazyStreamReleaseNameAarch64" Default="aarch64-unknown-linux-gnu" Mode="" Description="Container Variable: lazyStreamReleaseNameAarch64" Type="Variable" Display="advanced-hide" Required="false" Mask="false">aarch64-unknown-linux-gnu</Config>
+  <Config Name="CDN" Target="cdn" Default="akc" Mode="" Description="Container Variable: cdn" Type="Variable" Display="advanced" Required="false" Mask="false">akc</Config>
+  <Config Name="use embyAPI" Target="use_embyAPI" Default="no" Mode="" Description="Container Variable: use_embyAPI" Type="Variable" Display="advanced" Required="false" Mask="false">no</Config>
+  <Config Name="channelsUpdateM3uURL" Target="channelsUpdateM3uURL" Default="" Mode="" Description="Container Variable: channelsUpdateM3uURL" Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="channelsUpdateXmltvURL" Target="channelsUpdateXmltvURL" Default="" Mode="" Description="Container Variable: channelsUpdateXmltvURL" Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="embyID" Target="embyID" Default="" Mode="" Description="Container Variable: embyID" Type="Variable" Display="advanced" Required="false" Mask="false"/>
+</Container>
