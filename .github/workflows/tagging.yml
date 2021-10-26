@@ -4,8 +4,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: olegtarasov/get-tag@v2.1
-        id: tagName
+      - name: Get smart tag
+        id: prepare
+        uses: Surgo/docker-smart-tag-action@v1
+        with:
+          docker_image: abuhamsa/xteve-lazystream
       - uses: actions/checkout@master
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
@@ -13,4 +16,4 @@ jobs:
           name: abuhamsa/xteve-lazystream
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: "latest,${{ steps.tagName.outputs.tag }}"
+          tags: "latest,${{ steps.prepare.outputs.tag }}"
