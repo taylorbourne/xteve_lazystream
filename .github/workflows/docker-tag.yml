@@ -13,4 +13,4 @@ jobs:
         name: abuhamsa/xteve-lazystream
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        tag_semver: true
+        tag_names: true
