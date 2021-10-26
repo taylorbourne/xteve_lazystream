@@ -1,0 +1,13 @@
+on:    
+  push:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Set Output
+      run: echo ::save-state name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
+    - name: Check Output
+      run: |
+        echo $RELEASE_VERSION
+        echo ${{ env.STATE_RELEASE_VERSION }}
