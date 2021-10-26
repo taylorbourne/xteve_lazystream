@@ -6,6 +6,11 @@ jobs:
     steps:
       - uses: olegtarasov/get-tag@v2.1
         id: tagName
-      - name: ECHO
-        run: |
-          echo $GIT_TAG_NAME
+      - uses: actions/checkout@master
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: abuhamsa/xteve-lazystream
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: "latest,${{ steps.tagName.outputs.tag }}"
