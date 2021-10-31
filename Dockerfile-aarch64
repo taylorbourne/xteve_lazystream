@@ -14,15 +14,15 @@ RUN tar xzf /tmp/s6overlay.tar.gz -C / \
 # Add packages
 RUN apk upgrade --update --no-cache \
     && apk add --no-cache \
-            ca-certificates \
-            curl \
-            tzdata \
-            bash \
-            coreutils \
-            shadow \
-            ffmpeg \
-            vlc \
-            gnutls-utils
+    ca-certificates \
+    curl \
+    tzdata \
+    bash \
+    coreutils \
+    shadow \
+    ffmpeg \
+    vlc \
+    gnutls-utils
 
 # pi4 library to run lazystream: https://github.com/ljfranklin/alpine-pkg-glibc/releases/tag/2.32-r0-arm64
 RUN wget https://github.com/ljfranklin/alpine-pkg-glibc/releases/download/2.32-r0-arm64/glibc-2.32-r0.apk
@@ -33,7 +33,7 @@ RUN apk add --allow-untrusted glibc-bin-2.32-r0.apk
 
 RUN wget https://github.com/ljfranklin/alpine-pkg-glibc/releases/download/2.32-r0-arm64/glibc-i18n-2.32-r0.apk
 RUN apk add --allow-untrusted glibc-i18n-2.32-r0.apk
-                       
+
 # Update Timezone
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -87,7 +87,8 @@ ENV PUID=1000 \
     embyPORT=8096 \
     embyApiKey= \
     embyID= \
-    use_plexAPI=no
+    use_plexAPI=no \
+    trim_xmltv=yes
 
 # Expose Port
 EXPOSE ${XTEVE_PORT}
