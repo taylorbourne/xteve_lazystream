@@ -16,7 +16,7 @@ if [ "$use_lazystream" = "yes" ]; then
 
 	args=()
 
-	if [ "$trim_xmltv" != "" ]; then args+=("--trim"); fi
+	if [ "$trim_xmltv" = "yes" ]; then args+=("--trim"); fi
 	if [ ! -z ${quality} ]; then args+=("--quality" "$quality"); fi
 	if [ "$cdn" = "l3c" ]; then args+=("--cdn" "l3c"); fi
 
