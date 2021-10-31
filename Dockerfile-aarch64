@@ -14,15 +14,15 @@ RUN tar xzf /tmp/s6overlay.tar.gz -C / \
 # Add packages
 RUN apk upgrade --update --no-cache \
     && apk add --no-cache \
-            ca-certificates \
-            curl \
-            tzdata \
-            bash \
-            coreutils \
-            shadow \
-            ffmpeg \
-            vlc \
-            gnutls-utils
+    ca-certificates \
+    curl \
+    tzdata \
+    bash \
+    coreutils \
+    shadow \
+    ffmpeg \
+    vlc \
+    gnutls-utils
 
 # pi4 library to run lazystream: https://github.com/ljfranklin/alpine-pkg-glibc/releases/tag/2.32-r0-arm64
 RUN wget https://github.com/ljfranklin/alpine-pkg-glibc/releases/download/2.32-r0-arm64/glibc-2.32-r0.apk
@@ -33,7 +33,7 @@ RUN apk add --allow-untrusted glibc-bin-2.32-r0.apk
 
 RUN wget https://github.com/ljfranklin/alpine-pkg-glibc/releases/download/2.32-r0-arm64/glibc-i18n-2.32-r0.apk
 RUN apk add --allow-untrusted glibc-i18n-2.32-r0.apk
-                       
+
 # Update Timezone
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -42,7 +42,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN wget https://github.com/xteve-project/xTeVe-Downloads/raw/master/xteve_linux_arm64.zip -O temp.zip; unzip temp.zip -d /usr/bin/; rm temp.zip
 
 # Add lazystream
-RUN wget https://github.com/tarkah/lazystream/releases/download/v1.11.4/lazystream-v1.11.4-aarch64-unknown-linux-gnu.tar.gz -O lazystream.tar.gz; \
+RUN wget https://github.com/tarkah/lazystream/releases/download/v1.11.6/lazystream-v1.11.6-aarch64-unknown-linux-gnu.tar.gz -O lazystream.tar.gz; \
     tar xzf lazystream.tar.gz; \
     mv ././lazystream /usr/bin/lazystream; \
     rm lazystream.tar.gz; \
@@ -87,7 +87,8 @@ ENV PUID=1000 \
     embyPORT=8096 \
     embyApiKey= \
     embyID= \
-    use_plexAPI=no
+    use_plexAPI=no \
+    trim_xmltv=yes
 
 # Expose Port
 EXPOSE ${XTEVE_PORT}
