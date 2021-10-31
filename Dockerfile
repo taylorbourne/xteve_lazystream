@@ -77,7 +77,8 @@ ENV PUID=1000 \
     embyPORT=8096 \
     embyApiKey= \
     embyID= \
-    use_plexAPI=no
+    use_plexAPI=no \
+    trim_xmltv=yes
 
 # Expose Port
 EXPOSE ${XTEVE_PORT}

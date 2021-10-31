@@ -85,6 +85,11 @@
     </Variable>
     <Variable>
       <Value>yes</Value>
+      <Name>trim_xmltv</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yes</Value>
       <Name>include_nhl</Name>
       <Mode/>
     </Variable>
@@ -167,6 +172,7 @@
   <Config Name="Path" Target="/playlists" Default="/mnt/user/appdata/xteve/playlists/" Mode="rw" Description="Container Path: /playlists" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/xteve/playlists/</Config>
   <Config Name="Xteve API" Target="use_xTeveAPI" Default="yes" Mode="" Description="Container Variable: use_xTeveAPI" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
   <Config Name="Use Lazystream" Target="use_lazystream" Default="yes" Mode="" Description="Container Variable: use_lazystream" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="Trim XMLTV" Target="trim_xmltv" Default="yes" Mode="" Description="Container Variable: trim_xmltv" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
   <Config Name="Include NHL" Target="include_nhl" Default="yes" Mode="" Description="Container Variable: include_nhl" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
   <Config Name="include MLB" Target="include_mlb" Default="yes" Mode="" Description="Container Variable: include_mlb" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
   <Config Name="Use Guide2go" Target="use_guide2go" Default="no" Mode="" Description="Container Variable: use_guide2go" Type="Variable" Display="always" Required="false" Mask="false">no</Config>
