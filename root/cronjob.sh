@@ -110,7 +110,7 @@ if [ "$use_plexAPI" = "yes" ]; then
 	if [ -z "$plexUpdateURL" ]; then
 		echo "no Plex credentials provided"
 	else
-		echo $("$plexUpdateUrl" | sed 's/\\/ /g' | sed "s/'/\"/g")
+		echo $("$plexUpdateUrl" | sed 's/\\/\n/g' | sed "s/'/\"/g")
 		sleep 1
 	fi
 fi
