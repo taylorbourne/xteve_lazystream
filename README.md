@@ -42,6 +42,10 @@ or see [docker-compose.yml](docker-compose.yml) for an example docker-compose se
 
 Defaults & behavior can be changed through environment variables. `sample.env` should be renamed to `.env` and supplied through the `--env-file` docker run option. The `.env` file can also be picked up if using this in a `docker compose` setup.
 
+### IMPORTANT
+
+You _MUST_ set the environment variable `lazyStreamHost` otherwise LazyStream will _not_ work.
+
 ## Cron schedule
 
 By default, the cron job is scheduled to run every hour. A custom cron schedule can be specified by renaming the `sample_cron.txt` file in the `/config` volume to `cron.txt` and editing the schedule. Make sure to restart your container to take effect.
