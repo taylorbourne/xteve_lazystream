@@ -10,7 +10,7 @@ exec 1> >(prepend "[update-hosts] ")
 
 
 # Update hosts file
-export IP=$(getent ahostsv4 freesports.ddns.net | awk '{ print $1 }' | head -1)
+export IP=$(getent ahostsv4 "$lazyStreamHost" | awk '{ print $1 }' | head -1)
 
 echo $IP playback.svcs.mlb.com >> /etc/hosts
 echo $IP mf.svc.nhl.com >> /etc/hosts
