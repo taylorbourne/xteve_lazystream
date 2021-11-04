@@ -107,7 +107,7 @@ if [ "$use_plexAPI" = "yes" ]; then
 	if [ -z "$plexUpdateURL" ]; then
 		echo "no Plex credentials provided"
 	else
-		curl -s -X POST "$plexUpdateURL"
+		curl --location --request POST "$plexUpdateURL"
 		sleep 1
 	fi
 fi
