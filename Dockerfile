@@ -78,7 +78,7 @@ ENV PUID=1000 \
     embyApiKey= \
     embyID= \
     use_plexAPI=no \
-    trim_xmltv=yes \
+    trim_xmltv=no \
     hostOverride=
 
 # Expose Port
