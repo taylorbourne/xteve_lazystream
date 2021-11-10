@@ -19,6 +19,7 @@ if [ "$use_lazystream" = "yes" ]; then
 	if [ "$trim_xmltv" = "yes" ]; then args+=("--trim"); fi
 	if [ ! -z ${quality} ]; then args+=("--quality" "$quality"); fi
 	if [ "$cdn" = "l3c" ]; then args+=("--cdn" "l3c"); fi
+	if [ ! -z "$hostOverride" ]; then args+=("--host" "$hostOverride"); fi
 
 	if [ "$include_nhl" = "yes" ]; then
 		echo "Running Lazystream (NHL $quality via $cdn)..."
@@ -38,7 +39,9 @@ if [ "$use_lazystream" = "yes" ]; then
 		if [ "$nhl_exclude_french" = "yes" ]; 	 then nhl_args+=("--exclude-feeds" "FRENCH"); fi
 		if [ "$nhl_exclude_composite" = "yes" ]; then nhl_args+=("--exclude-feeds" "COMPOSITE"); fi
 
+		set -x
 		lazystream generate xmltv "${args[@]}" "${nhl_args[@]}"
+		set +x
 	fi
 	if [ "$include_mlb" = "yes" ]; then
 		echo "Running Lazystream (MLB $quality via $cdn)..."
@@ -59,7 +62,9 @@ if [ "$use_lazystream" = "yes" ]; then
 		if [ "$mlb_exclude_national" = "yes" ];  then mlb_args+=("--exclude-feeds" "NATIONAL"); fi
 		if [ "$mlb_exclude_composite" = "yes" ]; then mlb_args+=("--exclude-feeds" "COMPOSITE"); fi
 
+		set -x
 		lazystream generate xmltv "${args[@]}" "${mlb_args[@]}"
+		set +x
 	fi
 fi
 
