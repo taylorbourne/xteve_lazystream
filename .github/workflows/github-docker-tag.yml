@@ -1,6 +1,7 @@
 name: Publish to GitHub with a verstion-tag and latest-tag
 on:    
-  workflow_dispatch:
+  release:
+      types: [published]
 jobs:
   update:
     runs-on: ubuntu-latest
