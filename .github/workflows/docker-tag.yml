@@ -1,4 +1,4 @@
-name: Publish to DockerHub with a verstion-tag and latest-tag
+name: Publish to DockerHub/GitHub with a verstion-tag and latest-tag
 on:    
   release:
       types: [published]
@@ -7,17 +7,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Publish to Registry with version-tag
+    - name: Publish to DockerHub with version-tag
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: abuhamsa/xteve-lazystream
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         tag_names: true
-    - name: Publish to Registry with latest-tag
+    - name: Publish to DockerHub with latest-tag
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: abuhamsa/xteve-lazystream
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        tags: "latest"
+        tags: "latest"  
+    - name: Publish to GitHub with version-tag
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: abuhamsa/xteve-lazystream
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: ghcr.io
+        tag_names: true  
+    - name: Publish to GitHub with latest-tag
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: abuhamsa/xteve-lazystream
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: ghcr.io
+        tags: "latest"       
