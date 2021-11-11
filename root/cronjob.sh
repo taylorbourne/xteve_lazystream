@@ -32,18 +32,6 @@ if [ "$use_lazystream" = "yes" ]; then
 		nhl_args+=("--start-channel")
 		nhl_args+=("1000")
 		nhl_args+=("/playlists/lazystream/lazystream-nhl")
-<<<<<<< HEAD
-		currenttime=$(date +%H:%M)
-		if [[ "$currenttime" > "10:00" ]] && [[ "$currenttime" < "23:59" ]]; then
-			echo "Running Lazystream today"
-     		lazystream generate xmltv "${args[@]}" "${nhl_args[@]}"
-   		else
-		   	echo "Running Lazystream yesterday"
-		   	yesterday=$(date --date '-1 day' +'%Y%m%d')
-     		lazystream --date "$yesterday" generate xmltv "${args[@]}" "${nhl_args[@]}"
-   		fi
-		
-=======
 
 		if [ "$nhl_exclude_home" = "yes" ]; 	 then nhl_args+=("--exclude-feeds" "HOME"); fi
 		if [ "$nhl_exclude_away" = "yes" ]; 	 then nhl_args+=("--exclude-feeds" "AWAY"); fi
@@ -52,9 +40,16 @@ if [ "$use_lazystream" = "yes" ]; then
 		if [ "$nhl_exclude_composite" = "yes" ]; then nhl_args+=("--exclude-feeds" "COMPOSITE"); fi
 
 		set -x
-		lazystream generate xmltv "${args[@]}" "${nhl_args[@]}"
+	    currenttime=$(date +%H:%M)
+		if [[ "$currenttime" > "10:00" ]] && [[ "$currenttime" < "23:59" ]]; then
+			echo "Running Lazystream today"
+     		lazystream generate xmltv "${args[@]}" "${nhl_args[@]}"
+   		else
+		   	echo "Running Lazystream yesterday"
+		   	yesterday=$(date --date '-1 day' +'%Y%m%d')
+     		lazystream --date "$yesterday" generate xmltv "${args[@]}" "${nhl_args[@]}"
+   		fi
 		set +x
->>>>>>> 190cc66502c3fbd7cc8ad1c4a8d3d6fbed64ff49
 	fi
 	if [ "$include_mlb" = "yes" ]; then
 		echo "Running Lazystream (MLB $quality via $cdn)..."
