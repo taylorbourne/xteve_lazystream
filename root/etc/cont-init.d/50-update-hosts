@@ -10,7 +10,10 @@ exec 1> >(prepend "[update-hosts] ")
 
 
 # Update hosts file
-export IP=$(getent ahostsv4 "$lazyStreamHost" | awk '{ print $1 }' | head -1)
+if [ ! -z "$hostOverride" ]; then lazystream_host="$hostOverride"; else lazystream_host=$(lazystream host); fi
+echo "Using host ${lazystream_host}"
+
+export IP=$(getent ahostsv4 $(echo $lazystream_host | sed -e 's/https*:\/\///g') | awk '{ print $1 }' | head -1)
 
 echo $IP playback.svcs.mlb.com >> /etc/hosts
 echo $IP mf.svc.nhl.com >> /etc/hosts
