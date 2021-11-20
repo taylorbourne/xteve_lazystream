@@ -115,7 +115,7 @@ if [ "$use_plexAPI" = "yes" ]; then
 	# get protocol
 	proto="$(echo $plexUpdateURL | grep :// | sed -e's,^\(.*://\).*,\1,g')"
 	# remove the protocol
-	url="$(echo ${1/$proto/})"
+	url="$(echo ${plexUpdateURL/$proto/})"
 	# extract the host
 	host="$(echo ${url/} | cut -d/ -f1)"
 
