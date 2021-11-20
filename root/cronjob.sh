@@ -117,20 +117,13 @@ if [ "$use_plexAPI" = "yes" ]; then
 	# remove the protocol
 	url="$(echo ${plexUpdateURL/$proto/})"
 	# extract the host
-	host="$(echo ${url/} | cut -d/ -f1)"
-
-	# by request - try to extract the port
-	port="$(echo $host | sed -e 's,^.*:,:,g' -e 's,.*:\([0-9]*\).*,\1,g' -e 's,[^0-9],,g')"
-
-	echo "Current host: $host"
-	echo "Current port: $port"
-
+	plexHostPort="$(echo ${url/} | cut -d/ -f1)"
 	
 	echo "Updating Plex..."
 	if [ -z "$plexUpdateURL" ]; then
 		echo "no Plex credentials provided"
 	else
-		curl -s "$plexUpdateURL" -H "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0" -H "Accept: text/plain, */*; q=0.01" -H "Accept-Language: en" --compressed -H "X-Requested-With: XMLHttpRequest" -H "Connection: keep-alive" -H "Referer: http://$host:$port/web/index.html" --data ""
+		curl -s "$plexUpdateURL" -H "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0" -H "Accept: text/plain, */*; q=0.01" -H "Accept-Language: en" --compressed -H "X-Requested-With: XMLHttpRequest" -H "Connection: keep-alive" -H "Referer: http://$plexHostPort/web/index.html" --data ""
 		sleep 1
 	fi
 fi
