@@ -123,6 +123,8 @@ if [ "$use_plexAPI" = "yes" ]; then
 	if [ -z "$plexUpdateURL" ]; then
 		echo "no Plex credentials provided"
 	else
+		echo "Updating Plex via $plexUpdateURL"
+		echo "Using plexhostport $plexHostPort"
 		curl -s "$plexUpdateURL" -H "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0" -H "Accept: text/plain, */*; q=0.01" -H "Accept-Language: en" --compressed -H "X-Requested-With: XMLHttpRequest" -H "Connection: keep-alive" -H "Referer: http://$plexHostPort/web/index.html" --data ""
 		sleep 1
 	fi
