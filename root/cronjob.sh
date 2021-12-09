@@ -92,9 +92,9 @@ if [ "$use_xTeveAPI" = "yes" ]; then
 	echo "Updating xTeVe..."
 	curl -s -X POST -d '{"cmd":"update.m3u"}' http://127.0.0.1:$XTEVE_PORT/api/
 	# sleep 1
-	curl -s -X POST -d '{"cmd":"update.xmltv"}' http://$XTEVE_IP:$XTEVE_PORT/api/
+	curl -s -X POST -d '{"cmd":"update.xmltv"}' http://127.0.0.1:$XTEVE_PORT/api/
 	sleep 1
-	curl -s -X POST -d '{"cmd":"update.xepg"}' http://$XTEVE_IP:$XTEVE_PORT/api/
+	curl -s -X POST -d '{"cmd":"update.xepg"}' http://127.0.0.1:$XTEVE_PORT/api/
 	sleep 30
 fi
 
@@ -123,8 +123,6 @@ if [ "$use_plexAPI" = "yes" ]; then
 	if [ -z "$plexUpdateURL" ]; then
 		echo "no Plex credentials provided"
 	else
-		echo "Updating Plex via $plexUpdateURL"
-		echo "Using plexhostport $plexHostPort"
 		curl --location --request POST "$plexUpdateURL" -H "authority: $plexHostPort" -H "content-length: 0" -H "pragma: no-cache" -H "cache-control: no-cache" -H "sec-ch-ua: 'Google Chrome';v='95', 'Chromium';v='95', ';Not A Brand';v='99'" -H "accept: text/plain, */*; q=0.01" -H "x-requested-with: XMLHttpRequest" -H "accept-language: en" -H "sec-ch-ua-mobile: ?0" -H "user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" -H "sec-ch-ua-platform: 'macOS'" -H "origin: http://$plexHostPort" -H "sec-fetch-site: same-origin" -H "sec-fetch-mode: cors" -H "sec-fetch-dest: empty" -H "referer: http://$plexHostPort/web/index.html"
 		sleep 1
 	fi
