@@ -104,14 +104,13 @@ if [ "$use_xTeveAPI" = "yes" ]; then
 	
 	if [ -n "$main_xteve" ]; then
 	echo "Updating Main xTeVe... $main_xteve"
-	echo "Wating 30s before updating"
-	sleep 30
 	curl -s -X POST -d '{"cmd":"update.m3u"}' http://$main_xteve/api/
 	sleep 1
 	curl -s -X POST -d '{"cmd":"update.xmltv"}' http://$main_xteve/api/
 	sleep 1
 	curl -s -X POST -d '{"cmd":"update.xepg"}' http://$main_xteve/api/
-	sleep 1
+	echo "Wating 30s after updating"
+	sleep 30
 	fi
 
 fi
