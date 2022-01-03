@@ -100,8 +100,7 @@ if [ "$use_xTeveAPI" = "yes" ]; then
 	curl -s -X POST -d '{"cmd":"update.xmltv"}' http://127.0.0.1:$XTEVE_PORT/api/
 	sleep 1
 	curl -s -X POST -d '{"cmd":"update.xepg"}' http://127.0.0.1:$XTEVE_PORT/api/
-<<<<<<< HEAD
-	sleep 1
+	sleep 30
 	
 	if [ -n "$main_xteve" ]; then
 	echo "Updating Main xTeVe... $main_xteve"
@@ -115,9 +114,6 @@ if [ "$use_xTeveAPI" = "yes" ]; then
 	sleep 1
 	fi
 
-=======
-	sleep 30
->>>>>>> a64b617c24cc79ed1640c080f87df6b0f455ec95
 fi
 
 # update Emby via API
