@@ -34,6 +34,7 @@ if [ "$use_lazystream" = "yes" ]; then
 			nhl_args+=("1000")
 		else
 			nhl_args+=("$nhl_start_channel")
+		fi
 		nhl_args+=("/playlists/lazystream/lazystream-nhl")
 
 		if [ "$nhl_exclude_home" = "yes" ]; 	 then nhl_args+=("--exclude-feeds" "HOME"); fi
@@ -61,6 +62,7 @@ if [ "$use_lazystream" = "yes" ]; then
 			mlb_args+=("2000")
 		else
 			nhl_args+=("$mlb_start_channel")
+		fi
 		mlb_args+=("/playlists/lazystream/lazystream-mlb")
 
 		if [ "$mlb_exclude_home" = "yes" ]; 	 then mlb_args+=("--exclude-feeds" "HOME"); fi
