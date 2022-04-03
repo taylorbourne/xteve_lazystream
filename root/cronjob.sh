@@ -30,7 +30,11 @@ if [ "$use_lazystream" = "yes" ]; then
 		nhl_args+=("--channel-prefix")
 		nhl_args+=("Lazystream: NHL")
 		nhl_args+=("--start-channel")
-		nhl_args+=("1000")
+		if [ -z "$nhl_start_channel" ]; then
+			nhl_args+=("1000")
+		else
+			nhl_args+=("$nhl_start_channel")
+		fi
 		nhl_args+=("/playlists/lazystream/lazystream-nhl")
 
 		if [ "$nhl_exclude_home" = "yes" ]; 	 then nhl_args+=("--exclude-feeds" "HOME"); fi
@@ -40,15 +44,8 @@ if [ "$use_lazystream" = "yes" ]; then
 		if [ "$nhl_exclude_composite" = "yes" ]; then nhl_args+=("--exclude-feeds" "COMPOSITE"); fi
 
 		set -x
-	    currenttime=$(date +%H:%M)
-		if [[ "$currenttime" > "10:00" ]] && [[ "$currenttime" < "23:59" ]]; then
-			echo "Running Lazystream today"
-     		lazystream generate xmltv "${args[@]}" "${nhl_args[@]}"
-   		else
-		   	echo "Running Lazystream yesterday"
-		   	yesterday=$(date --date '-1 day' +'%Y%m%d')
-     		lazystream --date "$yesterday" generate xmltv "${args[@]}" "${nhl_args[@]}"
-   		fi
+		yesterday=$(date --date '-1 day' +'%Y%m%d')
+     	lazystream --date "$yesterday" generate xmltv "${args[@]}" "${nhl_args_yes[@]}"
 		set +x
 	fi
 	if [ "$include_mlb" = "yes" ]; then
@@ -62,7 +59,11 @@ if [ "$use_lazystream" = "yes" ]; then
 		mlb_args+=("--channel-prefix")
 		mlb_args+=("Lazystream: MLB")
 		mlb_args+=("--start-channel")
-		mlb_args+=("2000")
+		if [ -z "$mlb_start_channel" ]; then
+			mlb_args+=("2000")
+		else
+			nhl_args+=("$mlb_start_channel")
+		fi
 		mlb_args+=("/playlists/lazystream/lazystream-mlb")
 
 		if [ "$mlb_exclude_home" = "yes" ]; 	 then mlb_args+=("--exclude-feeds" "HOME"); fi
@@ -96,22 +97,22 @@ sleep 1
 if [ "$use_xTeveAPI" = "yes" ]; then
 	echo "Updating xTeVe..."
 	curl -s -X POST -d '{"cmd":"update.m3u"}' http://127.0.0.1:$XTEVE_PORT/api/
-	sleep 1
+	# sleep 1
 	curl -s -X POST -d '{"cmd":"update.xmltv"}' http://127.0.0.1:$XTEVE_PORT/api/
 	sleep 1
 	curl -s -X POST -d '{"cmd":"update.xepg"}' http://127.0.0.1:$XTEVE_PORT/api/
-	sleep 1
+	echo "Wating 30s after updating"
+	sleep 30
 	
 	if [ -n "$main_xteve" ]; then
 	echo "Updating Main xTeVe... $main_xteve"
-	echo "Wating 30s before updating"
-	sleep 30
 	curl -s -X POST -d '{"cmd":"update.m3u"}' http://$main_xteve/api/
 	sleep 1
 	curl -s -X POST -d '{"cmd":"update.xmltv"}' http://$main_xteve/api/
 	sleep 1
 	curl -s -X POST -d '{"cmd":"update.xepg"}' http://$main_xteve/api/
-	sleep 1
+	echo "Wating 30s after updating"
+	sleep 30
 	fi
 
 fi
@@ -129,11 +130,19 @@ fi
 
 # update Plex via API
 if [ "$use_plexAPI" = "yes" ]; then
+	
+	# get protocol
+	proto="$(echo $plexUpdateURL | grep :// | sed -e's,^\(.*://\).*,\1,g')"
+	# remove the protocol
+	url="$(echo ${plexUpdateURL/$proto/})"
+	# extract the host
+	plexHostPort="$(echo ${url/} | cut -d/ -f1)"
+	
 	echo "Updating Plex..."
 	if [ -z "$plexUpdateURL" ]; then
 		echo "no Plex credentials provided"
 	else
-		curl -s -X POST "$plexUpdateURL"
+		curl --location --request POST "$plexUpdateURL" -H "authority: $plexHostPort" -H "content-length: 0" -H "pragma: no-cache" -H "cache-control: no-cache" -H "sec-ch-ua: 'Google Chrome';v='95', 'Chromium';v='95', ';Not A Brand';v='99'" -H "accept: text/plain, */*; q=0.01" -H "x-requested-with: XMLHttpRequest" -H "accept-language: en" -H "sec-ch-ua-mobile: ?0" -H "user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" -H "sec-ch-ua-platform: 'macOS'" -H "origin: http://$plexHostPort" -H "sec-fetch-site: same-origin" -H "sec-fetch-mode: cors" -H "sec-fetch-dest: empty" -H "referer: http://$plexHostPort/web/index.html"
 		sleep 1
 	fi
 fi
