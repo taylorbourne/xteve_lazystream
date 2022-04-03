@@ -45,7 +45,7 @@ if [ "$use_lazystream" = "yes" ]; then
 
 		set -x
 		yesterday=$(date --date '-1 day' +'%Y%m%d')
-     	lazystream --date "$yesterday" generate xmltv "${args[@]}" "${nhl_args_yes[@]}"
+     	lazystream --date "$yesterday" generate xmltv "${args[@]}" "${nhl_args[@]}"
 		set +x
 	fi
 	if [ "$include_mlb" = "yes" ]; then
