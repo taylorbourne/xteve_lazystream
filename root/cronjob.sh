@@ -44,8 +44,8 @@ if [ "$use_lazystream" = "yes" ]; then
 		if [ "$nhl_exclude_composite" = "yes" ]; then nhl_args+=("--exclude-feeds" "COMPOSITE"); fi
 
 		set -x
-		yesterday=$(date --date '-1 day' +'%Y%m%d')
-     	lazystream --date "$yesterday" generate xmltv "${args[@]}" "${nhl_args[@]}"
+		tomorrow=$(date --date '+1 day' +'%Y%m%d')
+     	lazystream --date "$tomorrow" generate xmltv "${args[@]}" "${nhl_args[@]}"
 		set +x
 	fi
 	if [ "$include_mlb" = "yes" ]; then
