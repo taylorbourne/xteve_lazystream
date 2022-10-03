@@ -3,7 +3,7 @@ FROM alpine:latest
 LABEL maintainer="taylorbourne taylorbourne@me.com.com"
 
 # Install S6 overlay
-ARG S6_OVERLAY_RELEASE=https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-amd64.tar.gz
+ARG S6_OVERLAY_RELEASE=https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.3/s6-overlay-x86.tar.gz
 ENV S6_OVERLAY_RELEASE=${S6_OVERLAY_RELEASE}
 
 ADD ${S6_OVERLAY_RELEASE} /tmp/s6overlay.tar.gz
