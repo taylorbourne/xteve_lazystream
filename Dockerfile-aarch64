@@ -25,6 +25,7 @@ RUN apk upgrade --update --no-cache \
     gnutls-utils
 
 # pi4 library to run lazystream: https://github.com/ljfranklin/alpine-pkg-glibc/releases/tag/2.32-r0-arm64
+# force needed due to bug: https://github.com/sgerrand/alpine-pkg-glibc/issues/185
 RUN wget https://github.com/ljfranklin/alpine-pkg-glibc/releases/download/2.32-r0-arm64/glibc-2.32-r0.apk
 RUN apk add --allow-untrusted --force-overwrite glibc-2.32-r0.apk
 
