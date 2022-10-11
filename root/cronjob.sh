@@ -61,7 +61,7 @@ if [ "$use_lazystream" = "yes" ]; then
 		if [ -z "$mlb_start_channel" ]; then
 			mlb_args+=("2000")
 		else
-			nhl_args+=("$mlb_start_channel")
+			mlb_args+=("$mlb_start_channel")
 		fi
 		mlb_args+=("/playlists/lazystream/lazystream-mlb")
 
