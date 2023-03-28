@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Publish to GitHub with version-tag
-      uses: elgohr/Publish-Docker-Github-Action@master
+      uses: elgohr/Publish-Docker-Github-Action@v5
       with:
         name: abuhamsa/xteve-lazystream
         username: ${{ github.actor }}
@@ -16,7 +16,7 @@ jobs:
         registry: ghcr.io
         tag_names: true  
     - name: Publish to GitHub with latest-tag
-      uses: elgohr/Publish-Docker-Github-Action@master
+      uses: elgohr/Publish-Docker-Github-Action@v5
       with:
         name: abuhamsa/xteve-lazystream
         username: ${{ github.actor }}
